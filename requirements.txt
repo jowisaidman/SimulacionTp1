@@ -1,0 +1,17 @@
+certifi==2020.4.5.1
+cycler==0.10.0
+freetype-py==2.1.0.post1
+kiwisolver==1.2.0
+matplotlib==3.2.1
+numpy==1.18.4
+pandas==1.0.3
+pyparsing==2.4.7
+PyQt5==5.14.2
+PyQt5-sip==12.7.2
+python-dateutil==2.8.1
+pytz==2020.1
+six==1.15.0
+vispy==0.6.4
+wincertstore==0.2
+Pillow==7.1.2
+
