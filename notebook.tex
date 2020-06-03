@@ -1,0 +1,1952 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{ResolucionEjerciciosJuntos\_v01}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{ejercicio-1}{%
+\section{Ejercicio 1}\label{ejercicio-1}}
+
+    \hypertarget{item-a}{%
+\subsection{Item A}\label{item-a}}
+
+Vamos a crear un algoritmo que sea un Generador Congruencial Lineal
+(GCL). El codigo utilizado es el siguiente
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{SEMILLA} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{99730}\PY{o}{+}\PY{l+m+mi}{100866}\PY{o}{+}\PY{l+m+mi}{96786}\PY{o}{+}\PY{l+m+mi}{93762}\PY{p}{)}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{4}
+        
+        \PY{k}{def} \PY{n+nf}{GCL}\PY{p}{(}\PY{n}{n}\PY{p}{,}\PY{n}{Xo}\PY{p}{,}\PY{n}{incremento}\PY{p}{,} \PY{n}{modulo}\PY{p}{,} \PY{n}{multiplicador}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Recibe como parametro cinco enteros, numero de iteraciones n, semilla Xo,}
+        \PY{l+s+sd}{    , incremnto, modulo y multiplicador. Imprime el valor de cada iteracion\PYZdq{}\PYZdq{}\PYZdq{}}
+            \PY{n}{resultados} \PY{o}{=} \PY{p}{[}\PY{n}{Xo}\PY{p}{]}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+                \PY{n}{resultados}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{resultados}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{*}\PY{n}{multiplicador} \PY{o}{+} \PY{n}{incremento}\PY{p}{)} \PY{o}{\PYZpc{}} \PY{n}{modulo}\PY{p}{)}   
+            \PY{n}{resultados}\PY{o}{.}\PY{n}{pop}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+            \PY{k}{return} \PY{n}{resultados}
+\end{Verbatim}
+
+
+    Importamos la libreria necesaria y utilizamos la semilla que es el
+promedio de nuestro padrones. El resultado de los 10 primeros numeros
+son:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{resultado} \PY{o}{=} \PY{n}{GCL}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{n}{SEMILLA}\PY{p}{,}\PY{l+m+mi}{1664525}\PY{p}{,} \PY{l+m+mi}{2}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{32}\PY{p}{,} \PY{l+m+mi}{1013904223}\PY{p}{)}
+        \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{El numero }\PY{l+s+s1}{\PYZsq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{n}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ es: }\PY{l+s+s1}{\PYZsq{}}\PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{resultado}\PY{p}{[}\PY{n}{n}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+El numero 1 es: 614953939
+El numero 2 es: 3319310938
+El numero 3 es: 1608518515
+El numero 4 es: 512085690
+El numero 5 es: 3269962515
+El numero 6 es: 832498458
+El numero 7 es: 1617449651
+El numero 8 es: 1245314938
+El numero 9 es: 4153147987
+El numero 10 es: 921504730
+
+    \end{Verbatim}
+
+    \hypertarget{item-b}{%
+\subsection{Item B}\label{item-b}}
+
+El algoritmo utilizado es similar al anterior, la diferencia es que
+vamos a utilizar el modulo del algoritmo para obtener un rango de
+numeros generados al azar acotado entre 0 y 1
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k}{def} \PY{n+nf}{GCL\PYZus{}con\PYZus{}rango}\PY{p}{(}\PY{n}{n}\PY{p}{,}\PY{n}{Xo}\PY{p}{,}\PY{n}{incremento}\PY{p}{,} \PY{n}{modulo}\PY{p}{,} \PY{n}{multiplicador}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Recibe como parametro cinco enteros, numero de iteraciones n, semilla Xo,}
+        \PY{l+s+sd}{    , incremnto, modulo y multiplicador. }
+        \PY{l+s+sd}{    Los numeros random generados estan entre 0 y 1.}
+        \PY{l+s+sd}{    Imprime el valor de cada iteracion\PYZdq{}\PYZdq{}\PYZdq{}}
+            \PY{n}{resultados} \PY{o}{=} \PY{p}{[}\PY{n}{Xo}\PY{p}{]}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+                \PY{n}{resultados}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{p}{(}\PY{n}{resultados}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{*}\PY{n}{multiplicador} \PY{o}{+} \PY{n}{incremento}\PY{p}{)} \PY{o}{\PYZpc{}} \PY{n}{modulo}\PY{p}{)}\PY{p}{)}  
+            \PY{n}{resultados}\PY{o}{.}\PY{n}{pop}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+                \PY{n}{resultados}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{resultados}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{/}\PY{n}{modulo}   
+            \PY{k}{return} \PY{n}{resultados}
+\end{Verbatim}
+
+
+    Mostramos tambien los primeros 10 numeros generados con esta
+modificacion.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{resultado} \PY{o}{=} \PY{n}{GCL\PYZus{}con\PYZus{}rango}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{n}{SEMILLA}\PY{p}{,}\PY{l+m+mi}{1664525}\PY{p}{,} \PY{l+m+mi}{2}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{32}\PY{p}{,} \PY{l+m+mi}{1013904223}\PY{p}{)}
+        \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{El numero }\PY{l+s+s1}{\PYZsq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{n}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ es: }\PY{l+s+s1}{\PYZsq{}}\PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{resultado}\PY{p}{[}\PY{n}{n}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+El numero 1 es: 0.14318012143485248
+El numero 2 es: 0.7728373021818697
+El numero 3 es: 0.37451240117661655
+El numero 4 es: 0.11922924080863595
+El numero 5 es: 0.7613474770914763
+El numero 6 es: 0.19383115181699395
+El numero 7 es: 0.3765918433200568
+El numero 8 es: 0.28994747856631875
+El numero 9 es: 0.966980119002983
+El numero 10 es: 0.21455453941598535
+
+    \end{Verbatim}
+
+    \hypertarget{item-c}{%
+\subsection{Item C}\label{item-c}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{rcParams}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{figure.figsize}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{GCL\PYZus{}con\PYZus{}rango}\PY{p}{(}\PY{l+m+mi}{100000}\PY{p}{,}\PY{n}{SEMILLA}\PY{p}{,}\PY{l+m+mi}{1664525}\PY{p}{,} \PY{l+m+mi}{2}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{32}\PY{p}{,} \PY{l+m+mi}{1013904223}\PY{p}{)}\PY{p}{,} \PY{n}{histtype}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                 \PY{n}{edgecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{darkblue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{title\PYZus{}obj} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Histograma de los primeros 100.000 resultados del punto B}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}                
+        \PY{n}{plt}\PY{o}{.}\PY{n}{getp}\PY{p}{(}\PY{n}{title\PYZus{}obj}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{text}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}            
+        \PY{n}{plt}\PY{o}{.}\PY{n}{setp}\PY{p}{(}\PY{n}{title\PYZus{}obj}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{22}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Resultado}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}color}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{blue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Frecuencia}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}color}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{blue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{blue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{yticks}\PY{p}{(}\PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{blue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_11_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Podemos observar que el algoritmo utilizado tiene una ditribucion
+similar a una uniforme por lo que consideramos que el GCL con los
+parametros dados genera numeros pseudoaleatorios bien distribuidos.
+
+    \hypertarget{ejercicio-2}{%
+\section{Ejercicio 2}\label{ejercicio-2}}
+
+    \hypertarget{item-a}{%
+\subsection{Item A}\label{item-a}}
+
+    El espacio muestral son todos los valores que puede tomar la variable
+aleatoria. En nuestro caso esta variable seria la suma del resultado de
+los dos dados, entonces nuestro espacio muestral sera:
+S=\{2,3,4,5,6,7,8,9,10,11,12\}
+
+    \hypertarget{item-b}{%
+\subsection{Item B}\label{item-b}}
+
+    Utilizando las funciones del ejercicio 1, creamos una nueva funcion para
+simular la tirada de dos dados, recordamos:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{SEMILLA} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{99730}\PY{o}{+}\PY{l+m+mi}{100866}\PY{o}{+}\PY{l+m+mi}{96786}\PY{o}{+}\PY{l+m+mi}{93762}\PY{p}{)}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{4}
+        
+        \PY{k}{def} \PY{n+nf}{GCL}\PY{p}{(}\PY{n}{n}\PY{p}{,}\PY{n}{Xo}\PY{p}{,}\PY{n}{incremento}\PY{p}{,} \PY{n}{modulo}\PY{p}{,} \PY{n}{multiplicador}\PY{p}{)}\PY{p}{:}
+            \PY{n}{resultados} \PY{o}{=} \PY{p}{[}\PY{n}{Xo}\PY{p}{]}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+                \PY{n}{resultados}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{resultados}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{*}\PY{n}{multiplicador} \PY{o}{+} \PY{n}{incremento}\PY{p}{)} \PY{o}{\PYZpc{}} \PY{n}{modulo}\PY{p}{)}
+            \PY{n}{resultados}\PY{o}{.}\PY{n}{pop}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+            \PY{k}{return} \PY{n}{resultados}
+        
+        \PY{k}{def} \PY{n+nf}{GCL\PYZus{}con\PYZus{}rango}\PY{p}{(}\PY{n}{n}\PY{p}{,}\PY{n}{Xo}\PY{p}{,}\PY{n}{incremento}\PY{p}{,} \PY{n}{modulo}\PY{p}{,} \PY{n}{multiplicador}\PY{p}{)}\PY{p}{:}
+            \PY{n}{resultados} \PY{o}{=} \PY{n}{GCL}\PY{p}{(}\PY{n}{n}\PY{p}{,}\PY{n}{Xo}\PY{p}{,}\PY{n}{incremento}\PY{p}{,}\PY{n}{modulo}\PY{p}{,}\PY{n}{multiplicador}\PY{p}{)}\PY{p}{;}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+                \PY{n}{resultados}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{resultados}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{/}\PY{n}{modulo}
+            \PY{k}{return} \PY{n}{resultados}
+\end{Verbatim}
+
+
+    Ahora, vamos a definir una funcion que asigne con igual probabilidad a
+un resultado del dado, como la distribucion es cuasi-uniforme asignamos
+un intervalo de igual tamaño, de este modo nos aseguramos que cada
+resultado sea equiprobable y que el dado sea justo.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{k}{def} \PY{n+nf}{simular\PYZus{}dado}\PY{p}{(}\PY{n}{Xo}\PY{p}{)}\PY{p}{:}
+            \PY{k}{if} \PY{p}{(} \PY{l+m+mi}{0}\PY{o}{\PYZlt{}}\PY{n}{Xo}\PY{o}{\PYZlt{}}\PY{o}{=}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{6} \PY{p}{)}\PY{p}{:}
+                \PY{k}{return} \PY{l+m+mi}{1}
+            \PY{k}{elif} \PY{p}{(} \PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{6}\PY{o}{\PYZlt{}}\PY{n}{Xo}\PY{o}{\PYZlt{}}\PY{o}{=}\PY{l+m+mi}{2}\PY{o}{/}\PY{l+m+mi}{6} \PY{p}{)}\PY{p}{:}
+                \PY{k}{return} \PY{l+m+mi}{2}
+            \PY{k}{elif} \PY{p}{(} \PY{l+m+mi}{2}\PY{o}{/}\PY{l+m+mi}{6}\PY{o}{\PYZlt{}}\PY{n}{Xo}\PY{o}{\PYZlt{}}\PY{o}{=}\PY{l+m+mi}{3}\PY{o}{/}\PY{l+m+mi}{6} \PY{p}{)}\PY{p}{:}
+                \PY{k}{return} \PY{l+m+mi}{3}
+            \PY{k}{elif} \PY{p}{(} \PY{l+m+mi}{3}\PY{o}{/}\PY{l+m+mi}{6}\PY{o}{\PYZlt{}}\PY{n}{Xo}\PY{o}{\PYZlt{}}\PY{o}{=}\PY{l+m+mi}{4}\PY{o}{/}\PY{l+m+mi}{6} \PY{p}{)}\PY{p}{:}
+                \PY{k}{return} \PY{l+m+mi}{4}
+            \PY{k}{elif} \PY{p}{(} \PY{l+m+mi}{4}\PY{o}{/}\PY{l+m+mi}{6}\PY{o}{\PYZlt{}}\PY{n}{Xo}\PY{o}{\PYZlt{}}\PY{o}{=}\PY{l+m+mi}{5}\PY{o}{/}\PY{l+m+mi}{6} \PY{p}{)}\PY{p}{:}
+                \PY{k}{return} \PY{l+m+mi}{5}
+            \PY{k}{else}\PY{p}{:}
+                \PY{k}{return} \PY{l+m+mi}{6}
+            
+        
+        
+        \PY{k}{def} \PY{n+nf}{simular\PYZus{}tiradas}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+            \PY{n}{tiradas} \PY{o}{=} \PY{n}{GCL\PYZus{}con\PYZus{}rango}\PY{p}{(}\PY{n}{n}\PY{p}{,}\PY{n}{SEMILLA}\PY{p}{,}\PY{l+m+mi}{1664525}\PY{p}{,} \PY{l+m+mi}{2}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{32}\PY{p}{,} \PY{l+m+mi}{1013904223}\PY{p}{)}
+            \PY{n}{dados} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{n}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{:}
+                \PY{n}{dados}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{simular\PYZus{}dado}\PY{p}{(}\PY{n}{tiradas}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{simular\PYZus{}dado}\PY{p}{(}\PY{n}{tiradas}\PY{p}{[}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+            \PY{k}{return} \PY{n}{dados}
+\end{Verbatim}
+
+
+    Con las funciones definidas, simulamos las tiradas:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{tiradas} \PY{o}{=} \PY{n}{simular\PYZus{}tiradas}\PY{p}{(}\PY{l+m+mi}{20000}\PY{p}{)}
+\end{Verbatim}
+
+
+    Imprimimos los primeros 10 pares:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{El par generado numero }\PY{l+s+s1}{\PYZsq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{n}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ es: }\PY{l+s+s1}{\PYZsq{}}\PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{tiradas}\PY{p}{[}\PY{n}{n}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+El par generado numero 1 es: (1, 5)
+El par generado numero 2 es: (3, 1)
+El par generado numero 3 es: (5, 2)
+El par generado numero 4 es: (3, 2)
+El par generado numero 5 es: (6, 2)
+El par generado numero 6 es: (4, 4)
+El par generado numero 7 es: (2, 4)
+El par generado numero 8 es: (2, 4)
+El par generado numero 9 es: (4, 2)
+El par generado numero 10 es: (4, 5)
+
+    \end{Verbatim}
+
+    \hypertarget{item-c}{%
+\subsection{Item C}\label{item-c}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{tiradas} \PY{o}{=} \PY{n}{simular\PYZus{}tiradas}\PY{p}{(}\PY{l+m+mi}{20000}\PY{p}{)}
+         \PY{n}{sumas} \PY{o}{=} \PY{p}{[}\PY{n}{tirada}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{n}{tirada}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{k}{for} \PY{n}{tirada} \PY{o+ow}{in} \PY{n}{tiradas}\PY{p}{]}
+         \PY{n}{ticksx} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{14}\PY{p}{)}\PY{p}{)}
+         \PY{n}{title\PYZus{}obj} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Histograma de las tiradas del punto B}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}                
+         \PY{n}{plt}\PY{o}{.}\PY{n}{getp}\PY{p}{(}\PY{n}{title\PYZus{}obj}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{text}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}            
+         \PY{n}{plt}\PY{o}{.}\PY{n}{setp}\PY{p}{(}\PY{n}{title\PYZus{}obj}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{22}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Suma de los dados}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}color}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{blue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Frequencia}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}color}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{blue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{ticksx}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{blue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{yticks}\PY{p}{(}\PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{blue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{bins} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mf}{1.5}\PY{p}{,}\PY{l+m+mf}{13.5}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{sumas}\PY{p}{,} \PY{n}{bins}\PY{o}{=}\PY{n}{bins}\PY{p}{,}\PY{n}{histtype}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{edgecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{darkblue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Como conclusion, podemos ver que el histograma obtenido es de dados
+equiprobables ya que los numeros de los extremos tienen menor cantidad
+de combinacioes para obtenerlos por lo que su probabilidad de aparicion
+es menor, entonces la cantidad de veces que salga tambien sera menor.
+
+    \hypertarget{ejercicio-3}{%
+\section{Ejercicio 3}\label{ejercicio-3}}
+
+    \hypertarget{item-a}{%
+\subsection{Item A}\label{item-a}}
+
+Comenzamos importando las librerias necesarias y definiendo la funcion
+que vamos a graficar.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+\end{Verbatim}
+
+
+    Se define la función que recibe un parámetro x y devuelve: \[
+    f_X(x) = \begin{cases}
+                \frac{13}{12\pi} - \frac{x^2}{\pi^3},\quad -\frac{\pi}{2} \leq x \leq \frac{\pi}{2} \\
+                0, \quad \text{otro caso }\\
+            \end{cases}
+\]
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{k}{def} \PY{n+nf}{f}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+             \PY{k}{if} \PY{p}{(}\PY{n}{x} \PY{o}{\PYZlt{}} \PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{pi} \PY{o}{/} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)} \PY{o+ow}{or} \PY{p}{(}\PY{n}{x} \PY{o}{\PYZgt{}} \PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{return} \PY{l+m+mf}{0.}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{k}{return} \PY{p}{(}\PY{l+m+mi}{13}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{12}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)} \PY{o}{*} \PY{n}{x}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+         
+         \PY{n}{f} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{vectorize}\PY{p}{(}\PY{n}{f}\PY{p}{)}
+\end{Verbatim}
+
+
+    El grafico de la funcion densidad es el siguiente:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{rcParams}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{figure.figsize}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}
+         \PY{n}{dt} \PY{o}{=} \PY{l+m+mf}{0.01}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{)}
+         \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,}\PY{n}{dt}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{f}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{f}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{/}\PY{l+m+mf}{0.5}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{f}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{/}\PY{l+m+mf}{0.5}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mf}{0.5}\PY{p}{]}\PY{p}{)}
+         \PY{n}{title\PYZus{}obj} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Densidad de X}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}                
+         \PY{n}{plt}\PY{o}{.}\PY{n}{getp}\PY{p}{(}\PY{n}{title\PYZus{}obj}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{text}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}            
+         \PY{n}{plt}\PY{o}{.}\PY{n}{setp}\PY{p}{(}\PY{n}{title\PYZus{}obj}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{22}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}color}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{blue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f(x)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}color}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{blue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{blue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{yticks}\PY{p}{(}\PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{blue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_34_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{item-b}{%
+\subsection{Item B}\label{item-b}}
+
+    La funcion de densidad de probabilidad es: \[
+    f_X(x) = \begin{cases}
+                \frac{13}{12\pi} - \frac{x^2}{\pi^3},\quad -\frac{\pi}{2} \leq x \leq \frac{\pi}{2} \\
+                0, \quad \text{otro caso }\\
+            \end{cases}
+\] integramos la funcion para encontrar la funcion de probabilidad
+acumulada y luego su inversa: \[
+    F_X(x) = \int_{-\infty}^{x}f_X(t) dt = \int_{-\frac{\pi}{2}}^{x} \frac{13}{12\pi} - \frac{t^2}{\pi^3} dt\\
+\] \[
+    \implies F_X(x) =  \frac{13 t}{12\pi} - \frac{t^3}{3\pi^3} \big|_{\frac{-\pi}{2}}^x \\
+\] \[
+     \implies F_X(x) = \frac{13 x}{12\pi} - \frac{x^3}{3\pi^3} + \frac{13}{24} - \frac{1}{24} = \frac{13 x}{12\pi} - \frac{x^3}{3\pi^3} + \frac{1}{2} 
+\] La función de distribución es un polinomio de grado 3. Su inversa es
+muy difícil de obtener analíticamente. Por lo tanto, intentarmos
+aproximarla numéricamente, ya que con eso alcanzará para cumplir con el
+objetivo del ejercicio de generar la distribución.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{k}{def} \PY{n+nf}{F}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+             \PY{k}{if} \PY{p}{(}\PY{n}{x} \PY{o}{\PYZlt{}} \PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{return} \PY{l+m+mf}{0.}
+             \PY{k}{if} \PY{p}{(}\PY{n}{x} \PY{o}{\PYZgt{}} \PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{return} \PY{l+m+mf}{1.}
+             \PY{k}{return} \PY{p}{(}\PY{l+m+mi}{13}\PY{o}{*}\PY{n}{x} \PY{o}{/} \PY{p}{(}\PY{l+m+mi}{12}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{p}{)}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{p}{(}\PY{n}{x}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{3}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{3}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{3}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{2}
+         
+         \PY{n}{F} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{vectorize}\PY{p}{(}\PY{n}{F}\PY{p}{)}
+         
+         \PY{n}{dt}\PY{o}{=}\PY{l+m+mf}{0.01}
+         \PY{n}{rango\PYZus{}muestras} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{p}{,}\PY{n}{dt}\PY{p}{)}
+         \PY{n}{muestras} \PY{o}{=} \PY{n}{F}\PY{p}{(}\PY{n}{rango\PYZus{}muestras}\PY{p}{)}
+\end{Verbatim}
+
+
+    Ahora para la inversa se invierte el rol de los ejes: el eje X en la
+distribución pasa a ser el eje Y de la inversa y viceversa. Luego, para
+calcular la inversa en un determinado punto u, se interpolan las
+muestras tomadas entre \(t_1\) y \(t_2\), siendo \$F\_X(t\_1)
+\textless{} u \$ y \(F_X(t_2) >= u\), de modo que \[
+\hat{F_X^{-1}}(u) = t_1 + dt  \frac{u - F_X(t_1)}{F_X(t_2) - F_X(t_1)}
+\]
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{k}{def} \PY{n+nf}{Finv}\PY{p}{(}\PY{n}{u}\PY{p}{)}\PY{p}{:}
+             \PY{n}{t} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{/}\PY{l+m+mi}{2}
+             \PY{n}{i}\PY{o}{=}\PY{l+m+mi}{1}
+             \PY{n}{m} \PY{o}{=} \PY{n}{muestras}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+             \PY{n}{m\PYZus{}ant} \PY{o}{=} \PY{n}{muestras}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+             \PY{k}{while} \PY{p}{(}\PY{n}{m} \PY{o}{\PYZlt{}} \PY{n}{u}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{t}\PY{o}{+}\PY{o}{=}\PY{n}{dt}
+                 \PY{n}{m\PYZus{}ant} \PY{o}{=} \PY{n}{m}
+                 \PY{n}{i}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+                 \PY{n}{m} \PY{o}{=} \PY{n}{muestras}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+                 
+             \PY{n}{inv} \PY{o}{=} \PY{p}{(}\PY{n}{t}\PY{o}{\PYZhy{}}\PY{n}{dt}\PY{p}{)} \PY{o}{+} \PY{n}{dt}\PY{o}{*}\PY{p}{(}\PY{n}{u}\PY{o}{\PYZhy{}}\PY{n}{m\PYZus{}ant}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{m} \PY{o}{\PYZhy{}} \PY{n}{m\PYZus{}ant}\PY{p}{)}
+             \PY{k}{return} \PY{n}{inv}
+         
+         \PY{n}{Finv} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{vectorize}\PY{p}{(}\PY{n}{Finv}\PY{p}{)}
+\end{Verbatim}
+
+
+    Graficamos la funcion de probabilidad acumulada:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{]}\PY{p}{)}
+         \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{n}{dt}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{211}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{F}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mf}{1.5}\PY{p}{]}\PY{p}{)}
+         \PY{n}{title\PYZus{}obj} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Distribución de X}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}                
+         \PY{n}{plt}\PY{o}{.}\PY{n}{getp}\PY{p}{(}\PY{n}{title\PYZus{}obj}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{text}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}            
+         \PY{n}{plt}\PY{o}{.}\PY{n}{setp}\PY{p}{(}\PY{n}{title\PYZus{}obj}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{22}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}color}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{blue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}F\PYZus{}X(x)\PYZdl{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}color}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{blue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{blue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{yticks}\PY{p}{(}\PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{blue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_41_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Graficamos la inversa de la funcion de probabilidad acumulada:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{]}\PY{p}{)}
+         \PY{n}{u} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mf}{0.01}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{212}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{u}\PY{p}{,}\PY{n}{Finv}\PY{p}{(}\PY{n}{u}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+         
+         \PY{n}{title\PYZus{}obj} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Inversa de \PYZdl{}F\PYZus{}X(x)\PYZdl{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}                
+         \PY{n}{plt}\PY{o}{.}\PY{n}{getp}\PY{p}{(}\PY{n}{title\PYZus{}obj}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{text}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}            
+         \PY{n}{plt}\PY{o}{.}\PY{n}{setp}\PY{p}{(}\PY{n}{title\PYZus{}obj}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{22}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}color}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{blue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}F\PYZus{}X\PYZca{}}\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{\PYZhy{}1\PYZcb{}(x)\PYZdl{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}color}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{blue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{blue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{yticks}\PY{p}{(}\PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{blue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_43_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{item-c}{%
+\subsection{Item C}\label{item-c}}
+
+    Generamos 10\^{}5 muestras de U uniforme entre 0 y 1, utilizando el
+generador aleatorio del ejercicio 1. Por el método de transformación
+inversa sabemos que, con U uniforme entre 0 y 1, \[
+    F_X^{-1}(U) \sim X
+\] Por esta razón, calculamos la distribución inversa de X para los
+valores generados por el generador pseudo aleatorio, esperando conseguir
+la distribución propuesta.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{N} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{l+m+mf}{1e5}\PY{p}{)}
+         \PY{n}{U} \PY{o}{=} \PY{n}{GCL\PYZus{}con\PYZus{}rango}\PY{p}{(}\PY{n}{N}\PY{p}{,}\PY{n}{SEMILLA}\PY{p}{,}\PY{l+m+mi}{1664525}\PY{p}{,} \PY{l+m+mi}{2}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{32}\PY{p}{,} \PY{l+m+mi}{1013904223}\PY{p}{)}
+         \PY{n}{Xgen} \PY{o}{=} \PY{n}{Finv}\PY{p}{(}\PY{n}{U}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{item-d}{%
+\subsection{Item D}\label{item-d}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{dt} \PY{o}{=} \PY{l+m+mf}{0.01}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{)}
+         \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,}\PY{n}{dt}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{f}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Densidad de X}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{f}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{/}\PY{l+m+mf}{0.5}\PY{p}{,}\PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{f}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{/}\PY{l+m+mf}{0.5}\PY{p}{,}\PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mf}{0.5}\PY{p}{]}\PY{p}{)}
+         
+         \PY{n}{title\PYZus{}obj} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Histograma normalizado de variables generadas}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}                
+         \PY{n}{plt}\PY{o}{.}\PY{n}{getp}\PY{p}{(}\PY{n}{title\PYZus{}obj}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{text}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}            
+         \PY{n}{plt}\PY{o}{.}\PY{n}{setp}\PY{p}{(}\PY{n}{title\PYZus{}obj}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{22}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}color}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{blue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{f(x)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}color}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{blue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{blue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{yticks}\PY{p}{(}\PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{blue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{hist} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{Xgen}\PY{p}{,}\PY{n}{density}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,}\PY{n}{bins}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sturges}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Frecuencias normalizadas}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+         
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_48_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Podemos ver que la curva teórica de la densidad propuesta ajusta muy
+bien a las muestras generadas. Con esto podemos confirmar que el cálculo
+de la inversa mediante interpolación fue correcto.
+
+    \hypertarget{ejercicio-4}{%
+\section{Ejercicio 4}\label{ejercicio-4}}
+
+    \hypertarget{item-a-b-y-c}{%
+\subsection{Item A , B y C}\label{item-a-b-y-c}}
+
+    En primer lugar importamos las funciones necesarias y realizamos un
+gráfico de como es la función de densidad de la variable que queremos
+generar.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats} \PY{k}{import} \PY{n}{norm}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{mu} \PY{o}{=} \PY{l+m+mi}{25}
+         \PY{n}{sigma} \PY{o}{=} \PY{l+m+mi}{2}
+         \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{mu}\PY{o}{\PYZhy{}}\PY{l+m+mi}{3}\PY{o}{*}\PY{n}{sigma}\PY{p}{,}\PY{n}{mu}\PY{o}{+}\PY{l+m+mi}{3}\PY{o}{*}\PY{n}{sigma}\PY{p}{,}\PY{l+m+mf}{0.001}\PY{p}{)}
+         \PY{n}{xticks} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{19}\PY{p}{,}\PY{l+m+mi}{31}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{normal} \PY{o}{=} \PY{n}{norm}\PY{p}{(}\PY{n}{mu}\PY{p}{,}\PY{n}{sigma}\PY{p}{)}
+         \PY{n}{plot} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{normal}\PY{o}{.}\PY{n}{pdf}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{title\PYZus{}obj} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Densidad de \PYZdl{}X}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{sim N(}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{mu,}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{sigma\PYZca{}2), }\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{mu=25,}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{sigma=2\PYZdl{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}                
+         \PY{n}{plt}\PY{o}{.}\PY{n}{getp}\PY{p}{(}\PY{n}{title\PYZus{}obj}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{text}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}            
+         \PY{n}{plt}\PY{o}{.}\PY{n}{setp}\PY{p}{(}\PY{n}{title\PYZus{}obj}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{22}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}color}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{blue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{f(x)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}color}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{blue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{xticks}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{blue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{yticks}\PY{p}{(}\PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{blue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_54_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Considerando que para una distribución normal aproximadamente el 99.7\%
+de la probabilidad se concentra en el intervalo
+\([\mu-3\sigma,\mu+3\sigma]\), supondremos para nuestro algoritmo que la
+variable aleatoria está restringida a ese intervalo ({[}19,31{]} con los
+datos del enunciado). Al poder acotar los valores del dominio de la
+gaussiana y al conocer el valor máximo de su densidad, podemos
+implementar el generador.
+
+Implementamos el generador de la variable normal mediante el método de
+aceptación y rechazo.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{k}{def} \PY{n+nf}{aceptacionRechazo}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+             \PY{n}{gen} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{n}\PY{p}{)}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{accept} \PY{o}{=} \PY{k+kc}{False}
+                 \PY{k}{while} \PY{o+ow}{not} \PY{n}{accept}\PY{p}{:}
+                     \PY{n}{U1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{6}\PY{o}{*}\PY{n}{sigma} \PY{o}{+} \PY{n}{mu} \PY{o}{\PYZhy{}} \PY{l+m+mi}{3}\PY{o}{*}\PY{n}{sigma}
+                     \PY{n}{U2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{p}{)}\PY{o}{*}\PY{n}{maximo}
+                     \PY{k}{if} \PY{p}{(}\PY{n}{U2} \PY{o}{\PYZlt{}} \PY{n}{normal}\PY{o}{.}\PY{n}{pdf}\PY{p}{(}\PY{n}{U1}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                         \PY{n}{gen}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{U1}
+                         \PY{n}{accept} \PY{o}{=} \PY{k+kc}{True}
+             \PY{k}{return} \PY{n}{gen}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{maximo} \PY{o}{=} \PY{n}{normal}\PY{o}{.}\PY{n}{pdf}\PY{p}{(}\PY{n}{mu}\PY{p}{)}
+         \PY{n}{N} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{l+m+mf}{1e5}\PY{p}{)}
+         \PY{n}{generados} \PY{o}{=} \PY{n}{aceptacionRechazo}\PY{p}{(}\PY{n}{N}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{]}\PY{p}{)}
+         \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{mu}\PY{o}{\PYZhy{}}\PY{l+m+mi}{3}\PY{o}{*}\PY{n}{sigma}\PY{p}{,}\PY{n}{mu}\PY{o}{+}\PY{l+m+mi}{3}\PY{o}{*}\PY{n}{sigma}\PY{p}{,}\PY{l+m+mf}{0.001}\PY{p}{)}
+         \PY{n}{xticks} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{19}\PY{p}{,}\PY{l+m+mi}{31}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{normal} \PY{o}{=} \PY{n}{norm}\PY{p}{(}\PY{n}{mu}\PY{p}{,}\PY{n}{sigma}\PY{p}{)}
+         \PY{n}{plot} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{normal}\PY{o}{.}\PY{n}{pdf}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,}\PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Densidad teórica}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{xticks}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{generados}\PY{p}{,}\PY{n}{density}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,}\PY{n}{bins}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sturges}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{,}
+                  \PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Frecuencia muestral}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{normalizada}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n}{title\PYZus{}obj} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Densidad teórica y frecuencia muestral normalizada}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}                
+         \PY{n}{plt}\PY{o}{.}\PY{n}{getp}\PY{p}{(}\PY{n}{title\PYZus{}obj}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{text}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}            
+         \PY{n}{plt}\PY{o}{.}\PY{n}{setp}\PY{p}{(}\PY{n}{title\PYZus{}obj}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{22}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{xticks}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{blue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{yticks}\PY{p}{(}\PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{blue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{best}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_58_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{item-d}{%
+\subsection{Item D}\label{item-d}}
+
+Realizamos las comparaciones pedidas
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{media\PYZus{}muestral} \PY{o}{=} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{generados}\PY{p}{)}\PY{o}{/}\PY{n}{N}
+         \PY{n}{varianza\PYZus{}muestral} \PY{o}{=} \PY{n+nb}{sum}\PY{p}{(}\PY{p}{(}\PY{n}{generados} \PY{o}{\PYZhy{}} \PY{n}{media\PYZus{}muestral}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)} \PY{o}{/} \PY{n}{N}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Media muestral: }\PY{l+s+si}{\PYZpc{}5.5f}\PY{l+s+s2}{.}\PY{l+s+s2}{\PYZdq{}}\PY{o}{\PYZpc{}}\PY{k}{media\PYZus{}muestral})
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Varianza muestral: }\PY{l+s+si}{\PYZpc{}5.5f}\PY{l+s+s2}{\PYZdq{}}\PY{o}{\PYZpc{}}\PY{k}{varianza\PYZus{}muestral})
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Media muestral: 24.99854.
+Varianza muestral: 3.88203
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{Er\PYZus{}media} \PY{o}{=} \PY{n+nb}{abs}\PY{p}{(}\PY{n}{media\PYZus{}muestral} \PY{o}{\PYZhy{}} \PY{n}{mu}\PY{p}{)} \PY{o}{/} \PY{n}{mu}
+         \PY{n}{Er\PYZus{}var} \PY{o}{=} \PY{n+nb}{abs}\PY{p}{(}\PY{n}{varianza\PYZus{}muestral} \PY{o}{\PYZhy{}} \PY{n}{sigma}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)} \PY{o}{/} \PY{n}{sigma}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Error relativo en la media muestral: }\PY{l+s+si}{\PYZpc{}5.5f}\PY{l+s+s2}{.}\PY{l+s+s2}{\PYZdq{}}\PY{o}{\PYZpc{}}\PY{k}{Er\PYZus{}media})
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Error relativo en la varianza muestral: }\PY{l+s+si}{\PYZpc{}5.5f}\PY{l+s+s2}{\PYZdq{}}\PY{o}{\PYZpc{}}\PY{k}{Er\PYZus{}var})
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Error relativo en la media muestral: 0.00006.
+Error relativo en la varianza muestral: 0.02949
+
+    \end{Verbatim}
+
+    \hypertarget{ejercicio-5}{%
+\section{Ejercicio 5}\label{ejercicio-5}}
+
+    Utilizamos la funcion GCL\_con\_rango(n,Xo,incremento, modulo,
+multiplicador) definida en el ejercicio 1 e importamos las librerias
+necesarias
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats} \PY{k}{import} \PY{n}{chi2}\PY{p}{,} \PY{n}{chisquare}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{SEMILLA} \PY{o}{=} \PY{p}{(}\PY{p}{(}\PY{l+m+mi}{99730}\PY{o}{+}\PY{l+m+mi}{100866}\PY{o}{+}\PY{l+m+mi}{96786}\PY{o}{+}\PY{l+m+mi}{93762}\PY{p}{)}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{4}\PY{p}{)}
+         \PY{k}{def} \PY{n+nf}{obtener\PYZus{}tam\PYZus{}gap\PYZus{}test}\PY{p}{(}\PY{n}{muestra}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}Dada una muestra de numeros aleatorios cuenta cuantos nuemeros seguidos}
+         \PY{l+s+sd}{    pertenecen al intervalo [0.2;0.5] y devuelve un arreglo\PYZsq{}\PYZsq{}\PYZsq{}}
+             \PY{n}{repeticiones} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{n}{frequencias} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{muestra}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{if} \PY{p}{(}\PY{l+m+mf}{0.2} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{muestra}\PY{p}{[}\PY{n}{n}\PY{p}{]} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mf}{0.5} \PY{o+ow}{and} \PY{n}{repeticiones}\PY{o}{\PYZgt{}}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{frequencias}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{repeticiones}\PY{p}{)}
+                     \PY{n}{repeticiones} \PY{o}{=} \PY{l+m+mi}{0}
+                     \PY{k}{continue}
+                 \PY{n}{repeticiones}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+             \PY{k}{if} \PY{p}{(}\PY{n}{repeticiones}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{frequencias}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{repeticiones}\PY{p}{)}
+             \PY{k}{return} \PY{n}{frequencias}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{k}{def} \PY{n+nf}{obtener\PYZus{}frec\PYZus{}tam\PYZus{}gap\PYZus{}observadas}\PY{p}{(}\PY{n}{freq\PYZus{}gap\PYZus{}test}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}Dada una lista cuenta la cantidad de elementos repetidos en un diccionario\PYZsq{}\PYZsq{}\PYZsq{}}
+             \PY{n}{frequencias} \PY{o}{=} \PY{p}{\PYZob{}}\PY{n}{i}\PY{p}{:}\PY{n}{freq\PYZus{}gap\PYZus{}test}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{n}{i}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{freq\PYZus{}gap\PYZus{}test}\PY{p}{\PYZcb{}}
+             \PY{k}{return} \PY{n}{frequencias}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{n}{muestra} \PY{o}{=} \PY{n}{GCL\PYZus{}con\PYZus{}rango}\PY{p}{(}\PY{l+m+mi}{100000}\PY{p}{,}\PY{n}{SEMILLA}\PY{p}{,}\PY{l+m+mi}{1664525}\PY{p}{,} \PY{l+m+mi}{2}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{32}\PY{p}{,} \PY{l+m+mi}{1013904223}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{k}{def} \PY{n+nf}{prob\PYZus{}geom}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}Funcion geometrica para obtener las probabilidades esperadas\PYZsq{}\PYZsq{}\PYZsq{}}
+             \PY{n}{p} \PY{o}{=} \PY{l+m+mf}{0.3}
+             \PY{n}{q} \PY{o}{=} \PY{p}{(}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{p}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{n}{x}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{n}{p}
+             \PY{k}{return} \PY{n}{q}
+\end{Verbatim}
+
+
+    Buscamos el estadistico con la formula vista en la practica
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{k}{def} \PY{n+nf}{chisquare\PYZus{}test\PYZus{}geom}\PY{p}{(}\PY{n}{frecuencias\PYZus{}obs}\PY{p}{)}\PY{p}{:} 
+             \PY{n}{estadistico} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{n}{n} \PY{o}{=} \PY{n+nb}{sum}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n}{frecuencias\PYZus{}obs}\PY{o}{.}\PY{n}{values}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             \PY{k}{for} \PY{n}{tam} \PY{o+ow}{in} \PY{n}{frecuencias\PYZus{}obs}\PY{p}{:}
+                 \PY{n}{p} \PY{o}{=} \PY{n}{prob\PYZus{}geom}\PY{p}{(}\PY{n}{tam}\PY{p}{)}
+                 \PY{n}{estadistico} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{p}{(}\PY{n}{frecuencias\PYZus{}obs}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{n}{tam}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{n}{n}\PY{o}{*}\PY{n}{p}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)} \PY{o}{/} \PY{p}{(}\PY{n}{n}\PY{o}{*}\PY{n}{p}\PY{p}{)}
+             \PY{k}{return} \PY{n}{estadistico}
+\end{Verbatim}
+
+
+    Contamos los gaps y la cantidad de veces que halla aparecido un gap de
+tamaño n.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{n}{tam\PYZus{}gap\PYZus{}test} \PY{o}{=} \PY{n}{obtener\PYZus{}tam\PYZus{}gap\PYZus{}test}\PY{p}{(}\PY{n}{muestra}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{tam\PYZus{}gap\PYZus{}test}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{)}
+         
+         \PY{n}{frequencias\PYZus{}tam\PYZus{}gap\PYZus{}observadas} \PY{o}{=} \PY{n}{obtener\PYZus{}frec\PYZus{}tam\PYZus{}gap\PYZus{}observadas}\PY{p}{(}\PY{n}{tam\PYZus{}gap\PYZus{}test}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{frequencias\PYZus{}tam\PYZus{}gap\PYZus{}observadas}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[2, 3, 0, 1, 4]
+\{2: 4384, 3: 3065, 0: 8963, 1: 6444, 4: 2101, 16: 26, 5: 1515, 11: 180, 7: 721, 9: 356, 13: 91, 6: 1061, 8: 526, 10: 280, 15: 39, 12: 136, 14: 57, 17: 29, 19: 13, 18: 12, 20: 7, 24: 1, 27: 2, 23: 1, 21: 2, 22: 2, 38: 1, 32: 1, 25: 1\}
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{n}{names} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tam\PYZus{}gap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cant\PYZus{}repeticiones}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{formats} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{i8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{i8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{dtype} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{n}{names} \PY{o}{=} \PY{n}{names}\PY{p}{,} \PY{n}{formats}\PY{o}{=}\PY{n}{formats}\PY{p}{)}
+         \PY{n}{frequencias} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n}{frequencias\PYZus{}tam\PYZus{}gap\PYZus{}observadas}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{dtype}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{frequencias}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{repr}\PY{p}{(}\PY{n}{frequencias}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[( 2, 4384) ( 3, 3065) ( 0, 8963) ( 1, 6444) ( 4, 2101) (16,   26)
+ ( 5, 1515) (11,  180) ( 7,  721) ( 9,  356) (13,   91) ( 6, 1061)
+ ( 8,  526) (10,  280) (15,   39) (12,  136) (14,   57) (17,   29)
+ (19,   13) (18,   12) (20,    7) (24,    1) (27,    2) (23,    1)
+ (21,    2) (22,    2) (38,    1) (32,    1) (25,    1)]
+array([( 2, 4384), ( 3, 3065), ( 0, 8963), ( 1, 6444), ( 4, 2101),
+       (16,   26), ( 5, 1515), (11,  180), ( 7,  721), ( 9,  356),
+       (13,   91), ( 6, 1061), ( 8,  526), (10,  280), (15,   39),
+       (12,  136), (14,   57), (17,   29), (19,   13), (18,   12),
+       (20,    7), (24,    1), (27,    2), (23,    1), (21,    2),
+       (22,    2), (38,    1), (32,    1), (25,    1)],
+      dtype=[('tam\_gap', '<i8'), ('cant\_repeticiones', '<i8')])
+
+    \end{Verbatim}
+
+    \hypertarget{test-estadistico}{%
+\section{Test estadistico}\label{test-estadistico}}
+
+Aplicar un gap test al generador congruencial lineal implementado en el
+ejercicio 1 utilizando el intervalo {[}0,2 - 0,5{]}. Analizar el
+resultado obtenido, e indicar si la distribución de probabilidades pasa
+o no el test. Considerar un nivel de significación del 1\%.
+
+    Buscamos el estadistico
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{n}{estadistico} \PY{o}{=} \PY{n}{chisquare\PYZus{}test\PYZus{}geom}\PY{p}{(}\PY{n}{frequencias\PYZus{}tam\PYZus{}gap\PYZus{}observadas}\PY{p}{)}
+         \PY{n}{estadistico}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}37}]:} 3937.685890226105
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{n}{frecuencias\PYZus{}observadas} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{frequencias\PYZus{}tam\PYZus{}gap\PYZus{}observadas}\PY{o}{.}\PY{n}{values}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{frecuencias\PYZus{}observadas}\PY{p}{)}
+         
+         \PY{n}{frecuencias\PYZus{}esperadas} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{frecuencias\PYZus{}observadas}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{n}{frecuencias\PYZus{}esperadas}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb}{round}\PY{p}{(}\PY{n}{prob\PYZus{}geom}\PY{p}{(}\PY{n}{i}\PY{p}{)} \PY{o}{*} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{frecuencias\PYZus{}observadas}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{frecuencias\PYZus{}esperadas}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[4384, 3065, 8963, 6444, 2101, 26, 1515, 180, 721, 356, 91, 1061, 526, 280, 39, 136, 57, 29, 13, 12, 7, 1, 2, 1, 2, 2, 1, 1, 1]
+[12864.0, 9005.0, 6304.0, 4412.0, 3089.0, 2162.0, 1513.0, 1059.0, 742.0, 519.0, 363.0, 254.0, 178.0, 125.0, 87.0, 61.0, 43.0, 30.0, 21.0, 15.0, 10.0, 7.0, 5.0, 4.0, 2.0, 2.0, 1.0, 1.0, 1.0]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{n}{chisquare}\PY{p}{(}\PY{n}{f\PYZus{}obs} \PY{o}{=} \PY{n}{frecuencias\PYZus{}observadas}\PY{p}{,} \PY{n}{f\PYZus{}exp} \PY{o}{=} \PY{n}{frecuencias\PYZus{}esperadas}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}39}]:} Power\_divergenceResult(statistic=18550.766078353827, pvalue=0.0)
+\end{Verbatim}
+            
+    Dado que el estadistico calculado D2 \textgreater{} estadistico teorico
+Dalfa
+
+D2 = 3937.68589
+
+dalfa = 3873.3180925
+
+\hypertarget{rechazamos-el-test.}{%
+\subsubsection{Rechazamos el test.}\label{rechazamos-el-test.}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{n}{ticksx} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{41}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{rcParams}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{figure.figsize}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{bins} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.5}\PY{p}{,}\PY{l+m+mf}{40.5}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{tam\PYZus{}gap\PYZus{}test}\PY{p}{,} \PY{n}{edgecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{bins}\PY{o}{=}\PY{n}{bins}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{n}{left}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{ticksx}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{green}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Frecuencias del gap\PYZhy{}test}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{18}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}color}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{green}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cantidad de veces seguidas en las que no se genero un numero entre 0.2 y 0.5}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}color}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{green}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Frecuencia}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}color}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{green}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_80_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{ejercicio-6}{%
+\section{Ejercicio 6}\label{ejercicio-6}}
+
+    Utilizamos las funciones definidas en el ejercicio 2
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats} \PY{k}{import} \PY{n}{chi2}\PY{p}{,}\PY{n}{chisquare}
+         \PY{k+kn}{import} \PY{n+nn}{random}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{k}{def} \PY{n+nf}{GCL\PYZus{}con\PYZus{}rango}\PY{p}{(}\PY{n}{n}\PY{p}{,}\PY{n}{Xo}\PY{p}{,}\PY{n}{incremento}\PY{p}{,} \PY{n}{modulo}\PY{p}{,} \PY{n}{multiplicador}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Recibe como parametro cinco enteros, numero de iteraciones n, semilla Xo,}
+         \PY{l+s+sd}{    , incremnto, modulo y multiplicador. }
+         \PY{l+s+sd}{    Los numeros random generados estan entre 0 y 1.}
+         \PY{l+s+sd}{    Imprime el valor de cada iteracion\PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{resultados} \PY{o}{=} \PY{p}{[}\PY{n}{Xo}\PY{p}{]}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{resultados}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{p}{(}\PY{n}{resultados}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{*}\PY{n}{multiplicador} \PY{o}{+} \PY{n}{incremento}\PY{p}{)} \PY{o}{\PYZpc{}} \PY{n}{modulo}\PY{p}{)}\PY{p}{)}  
+             \PY{n}{resultados}\PY{o}{.}\PY{n}{pop}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{resultados}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{resultados}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{/}\PY{n}{modulo}   
+             \PY{k}{return} \PY{n}{resultados}
+         
+         \PY{k}{def} \PY{n+nf}{simular\PYZus{}dado}\PY{p}{(}\PY{n}{Xo}\PY{p}{)}\PY{p}{:}
+             \PY{n}{resultado\PYZus{}dado}\PY{o}{=}\PY{n}{GCL\PYZus{}con\PYZus{}rango}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{n}{Xo}\PY{p}{,}\PY{l+m+mi}{1664525}\PY{p}{,} \PY{l+m+mi}{2}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{32}\PY{p}{,} \PY{l+m+mi}{1013904223}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+             \PY{k}{if} \PY{p}{(} \PY{l+m+mi}{0}\PY{o}{\PYZlt{}}\PY{n}{resultado\PYZus{}dado}\PY{o}{\PYZlt{}}\PY{o}{=}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{6} \PY{p}{)}\PY{p}{:}
+                 \PY{n}{resultado\PYZus{}dado}\PY{o}{=}\PY{l+m+mi}{1}
+             \PY{k}{elif} \PY{p}{(} \PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{6}\PY{o}{\PYZlt{}}\PY{n}{resultado\PYZus{}dado}\PY{o}{\PYZlt{}}\PY{o}{=}\PY{l+m+mi}{2}\PY{o}{/}\PY{l+m+mi}{6} \PY{p}{)}\PY{p}{:}
+                 \PY{n}{resultado\PYZus{}dado}\PY{o}{=}\PY{l+m+mi}{2}
+             \PY{k}{elif} \PY{p}{(} \PY{l+m+mi}{2}\PY{o}{/}\PY{l+m+mi}{6}\PY{o}{\PYZlt{}}\PY{n}{resultado\PYZus{}dado}\PY{o}{\PYZlt{}}\PY{o}{=}\PY{l+m+mi}{3}\PY{o}{/}\PY{l+m+mi}{6} \PY{p}{)}\PY{p}{:}
+                 \PY{n}{resultado\PYZus{}dado}\PY{o}{=}\PY{l+m+mi}{3}
+             \PY{k}{elif} \PY{p}{(} \PY{l+m+mi}{3}\PY{o}{/}\PY{l+m+mi}{6}\PY{o}{\PYZlt{}}\PY{n}{resultado\PYZus{}dado}\PY{o}{\PYZlt{}}\PY{o}{=}\PY{l+m+mi}{4}\PY{o}{/}\PY{l+m+mi}{6} \PY{p}{)}\PY{p}{:}
+                 \PY{n}{resultado\PYZus{}dado}\PY{o}{=}\PY{l+m+mi}{4}
+             \PY{k}{elif} \PY{p}{(} \PY{l+m+mi}{4}\PY{o}{/}\PY{l+m+mi}{6}\PY{o}{\PYZlt{}}\PY{n}{resultado\PYZus{}dado}\PY{o}{\PYZlt{}}\PY{o}{=}\PY{l+m+mi}{5}\PY{o}{/}\PY{l+m+mi}{6} \PY{p}{)}\PY{p}{:}
+                 \PY{n}{resultado\PYZus{}dado}\PY{o}{=}\PY{l+m+mi}{5}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n}{resultado\PYZus{}dado}\PY{o}{=}\PY{l+m+mi}{6}
+             \PY{k}{return} \PY{n}{resultado\PYZus{}dado}
+         
+         
+         \PY{k}{def} \PY{n+nf}{simular\PYZus{}dados}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+             \PY{n}{tiradas}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{n}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{tiradas}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{simular\PYZus{}dado}\PY{p}{(}\PY{n+nb}{int}\PY{p}{(}\PY{n}{random}\PY{o}{.}\PY{n}{randrange}\PY{p}{(}\PY{l+m+mi}{1000}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{n}{simular\PYZus{}dado}\PY{p}{(}\PY{n+nb}{int}\PY{p}{(}\PY{n}{random}\PY{o}{.}\PY{n}{randrange}\PY{p}{(}\PY{l+m+mi}{1000}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             \PY{k}{return} \PY{n}{tiradas}
+\end{Verbatim}
+
+
+    Con el generador de numeros pseudo aleatorios del punto 2, generamos
+10\^{}5 tiradas de 2 dados. Luego, a cada tirada le calculamos el
+resultado como la suma de ambos dados. A partir de ese cálculo,
+generamos un histograma que muestre las ocurrencias de cada resultado
+posible.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{n}{N} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{l+m+mf}{1e5}\PY{p}{)}
+         \PY{n}{tiradas} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{map}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{+}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{simular\PYZus{}dados}\PY{p}{(}\PY{n}{N}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{n}{bins} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mf}{1.5}\PY{p}{,}\PY{l+m+mf}{13.5}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{hist} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{tiradas}\PY{p}{,}\PY{n}{bins}\PY{o}{=}\PY{n}{bins}\PY{p}{,}\PY{n}{histtype}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{edgecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{darkblue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{title\PYZus{}obj} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Histograma de las Tiradas Obtenidas}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}                
+         \PY{n}{plt}\PY{o}{.}\PY{n}{getp}\PY{p}{(}\PY{n}{title\PYZus{}obj}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{text}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}            
+         \PY{n}{plt}\PY{o}{.}\PY{n}{setp}\PY{p}{(}\PY{n}{title\PYZus{}obj}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{22}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{13}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}\PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{blue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{yticks}\PY{p}{(}\PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{blue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Suma}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}color}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{blue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Frequencia}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}color}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{blue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_87_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Las frecuencias normalizadas que se desearían para cada posible valor de
+una tirada están la siguiente tabla
+
+    Se tiene la fórmula para el estadístico \(D^2\) test de Chi cuadrado:
+
+\[
+    D^2 = \sum_{s=1}^k \frac{ (Y_s - n p_s )^2}{n p_s} \\
+    Y_s :\text{Frecuencia observada}, \quad n p_s: \text{ Frecuencia esperada }, \quad k: \text{clases,buckets,etc}
+\]
+
+y nos plantean tomar un nivel de significación de 1\% es decir,
+\(\alpha = 0.01\)
+
+Si el estadístico es mayor tiene un valor-P asociado mayor a \(\alpha\)
+o de forma equivalente, que sea \(D^2 < D_{\alpha}\), la ddistribución
+será aceptada. \[
+\]
+
+No es necesario implementar el cálculo del estadístico, el mismo ya esta
+implementado en la libreria scipy.stats
+
+Para poder realizar el test, definimos la frecuencia de cada resultado
+que esperaríamos obtener en la distribución contra la que estamos
+evaluando.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{n}{f\PYZus{}teo} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{36} \PY{o}{*} \PY{n+nb}{len}\PY{p}{(}\PY{n}{tiradas}\PY{p}{)}
+\end{Verbatim}
+
+
+    Las frecuencias observadas son las que usamos para construir el
+histograma anterior.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{n}{f\PYZus{}obs} \PY{o}{=} \PY{n}{hist}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+\end{Verbatim}
+
+
+    Utilizando las frecuencias observadas y esperadas ejecutamos el test de
+Chi cuadrado, que obtiene el estadístico y su correspondiente valor P.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{n}{chi\PYZus{}test} \PY{o}{=} \PY{n}{chisquare}\PY{p}{(}\PY{n}{f\PYZus{}obs}\PY{p}{,}\PY{n}{f\PYZus{}teo}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{n}{msj} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{El test de Chi\PYZca{}2 devolvio un estadístico D = }\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s2}{, correspondiente al valor p = }\PY{l+s+si}{\PYZob{}1\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PYZbs{}
+             \PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{chi\PYZus{}test}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{p}{,} \PY{n}{chi\PYZus{}test}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{msj}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+El test de Chi\^{}2 devolvio un estadístico D = 4.701949999999982, correspondiente al valor p = 0.9101784902570259
+
+    \end{Verbatim}
+
+    El test de \(\chi^2\) nos devolvió un estadístico \(D^2\) cuyo valor P
+asociado es mayor que el nivel de significación elegido
+(\(\alpha = 0.01\)). Por lo tanto, la distribución es aceptada. Para
+cambiar el resultado del test de hipótesis deberíamos tomar cualquier
+nivel de significación mayor al valor P obtenido
+(\(\alpha\in(pValue,1)\)) \[
+\]
+
+    \hypertarget{ejercicio-7}{%
+\section{Ejercicio 7}\label{ejercicio-7}}
+
+    Recordamos que en el ejercicio 4, mediante el método de aceptación y
+rechazo, implementamos un generador de números aleatorios con
+distribución normal con media \(\mu = 25\) y desvío estándar
+\(\sigma = 2\). Utilizamos nuevamente ese generador para obtener 100.000
+muestras. \[
+\]
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{k}{def} \PY{n+nf}{aceptacionRechazo}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+             \PY{n}{gen} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{n}\PY{p}{)}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{accept} \PY{o}{=} \PY{k+kc}{False}
+                 \PY{k}{while} \PY{o+ow}{not} \PY{n}{accept}\PY{p}{:}
+                     \PY{n}{U1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{6}\PY{o}{*}\PY{n}{sigma} \PY{o}{+} \PY{n}{mu} \PY{o}{\PYZhy{}} \PY{l+m+mi}{3}\PY{o}{*}\PY{n}{sigma}
+                     \PY{n}{U2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{p}{)}\PY{o}{*}\PY{n}{maximo}
+                     \PY{k}{if} \PY{p}{(}\PY{n}{U2} \PY{o}{\PYZlt{}} \PY{n}{normal}\PY{o}{.}\PY{n}{pdf}\PY{p}{(}\PY{n}{U1}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                         \PY{n}{gen}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{U1}
+                         \PY{n}{accept} \PY{o}{=} \PY{k+kc}{True}
+             \PY{k}{return} \PY{n}{gen}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}50}]:} \PY{n}{N} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{l+m+mf}{1e5}\PY{p}{)}
+         \PY{n}{generados} \PY{o}{=} \PY{n}{aceptacionRechazo}\PY{p}{(}\PY{n}{N}\PY{p}{)}
+         \PY{n}{ordenados} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{n}{generados}\PY{p}{)}
+\end{Verbatim}
+
+
+    A las muestras obtenidas, les aplicamos el Test de Kolmogorov-Smirnov
+contra la distribución teórica. Calculamos q tal que: \[
+    q = \max_x |\hat{F}_X(x) - F_X(x)|
+\]
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}51}]:} \PY{n}{q} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{k}{while} \PY{n}{i} \PY{o}{\PYZlt{}} \PY{n}{N}\PY{p}{:}
+             \PY{n}{x} \PY{o}{=} \PY{n}{ordenados}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+             \PY{k}{if} \PY{n+nb}{abs}\PY{p}{(}\PY{n}{i}\PY{o}{/}\PY{n}{N} \PY{o}{\PYZhy{}} \PY{n}{normal}\PY{o}{.}\PY{n}{cdf}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{n}{q}\PY{p}{:}
+                 \PY{n}{max\PYZus{}x} \PY{o}{=} \PY{n}{x}
+                 \PY{n}{q} \PY{o}{=} \PY{n+nb}{abs}\PY{p}{(}\PY{n}{i}\PY{o}{/}\PY{n}{N} \PY{o}{\PYZhy{}} \PY{n}{normal}\PY{o}{.}\PY{n}{cdf}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}
+             \PY{n}{i}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}52}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{q es: }\PY{l+s+s1}{\PYZsq{}}\PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{q}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+q es: 0.0024956343907278633
+
+    \end{Verbatim}
+
+    Nos proponen un nivel de significación \(\alpha = 0.01\). Aceptaremos la
+distribución si: \[
+    q \gt \sqrt{\frac{-1}{2N}\ln{\frac{\alpha}{2}}} = \text{umbral}
+\]
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}53}]:} \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.01}
+         \PY{n}{umbral} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{N}\PY{p}{)} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{alpha}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{El umbral es: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{umbral}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+El umbral es: 0.005146997846583986
+
+    \end{Verbatim}
+
+    Finalmente
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}54}]:} \PY{k}{if} \PY{n}{q} \PY{o}{\PYZgt{}} \PY{n}{umbral}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{La distribución es aceptada por el test}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{k}{else}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{La distribución es rechazada por el test}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+La distribución es rechazada por el test
+
+    \end{Verbatim}
+
+    \hypertarget{ejercicio-8}{%
+\section{Ejercicio 8}\label{ejercicio-8}}
+
+    Vamos a simular el movimiento de una particula considerando las
+indicaciones dadas, para ello comenzamos definiendo la clase que va a
+dibujar este evento.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}55}]:} \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{k+kn}{import} \PY{n+nn}{os}
+         \PY{k+kn}{from} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{animation} \PY{k}{import} \PY{n}{FuncAnimation}\PY{p}{,} \PY{n}{PillowWriter}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}56}]:} \PY{k}{class} \PY{n+nc}{DrawSimulation}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}Clase para dibujar el movimiento de la Particula\PYZsq{}\PYZsq{}\PYZsq{}}
+             \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{puntosr}\PY{p}{,} \PY{n}{puntosg}\PY{p}{,} \PY{n}{ancho}\PY{p}{,} \PY{n}{alto}\PY{p}{,} \PY{n}{t}\PY{p}{,} \PY{n}{duracion}\PY{p}{,} \PY{n}{largo\PYZus{}pared}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{fig}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{p}{)}
+         
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{ln1} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{ax}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{p}{]}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{g}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{ln2} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{ax}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{p}{]}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{square}\PY{p}{,} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{p}{]}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{wall}\PY{p}{,} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{p}{]}\PY{p}{)}
+         
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{alto} \PY{o}{=} \PY{n}{alto}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{largo\PYZus{}pared} \PY{o}{=} \PY{n}{largo\PYZus{}pared}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{ancho} \PY{o}{=} \PY{n}{ancho}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t} \PY{o}{=} \PY{n}{t}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{puntosr} \PY{o}{=} \PY{n}{puntosr}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{puntosg} \PY{o}{=} \PY{n}{puntosg}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{duracion} \PY{o}{=} \PY{n}{duracion} \PY{c+c1}{\PYZsh{}en segundos}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{fps} \PY{o}{=} \PY{n+nb}{min}\PY{p}{(}\PY{n+nb}{max}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{t}\PY{o}{/}\PY{o}{/}\PY{n}{duracion}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{30}\PY{p}{)}
+         
+             \PY{k}{def} \PY{n+nf}{draw}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{fname}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ejemplo.gif}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{ani} \PY{o}{=} \PY{n}{FuncAnimation}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{fig}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{update}\PY{p}{,} \PY{p}{[}\PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{init\PYZus{}func}\PY{o}{=}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{init}\PY{p}{)}
+                 \PY{n}{writer} \PY{o}{=} \PY{n}{PillowWriter}\PY{p}{(}\PY{n}{fps} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{fps}\PY{p}{)}
+                 \PY{n}{ani}\PY{o}{.}\PY{n}{save}\PY{p}{(}\PY{n}{fname}\PY{p}{,} \PY{n}{writer} \PY{o}{=} \PY{n}{writer}\PY{p}{)}
+                 \PY{c+c1}{\PYZsh{}os.system(f\PYZdq{}start \PYZob{}fname\PYZcb{}s\PYZdq{})}
+                 \PY{n}{os}\PY{o}{.}\PY{n}{system}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{eog }\PY{l+s+si}{\PYZob{}fname\PYZcb{}}\PY{l+s+s2}{\PYZam{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+             \PY{k}{def} \PY{n+nf}{init}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlim}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{ancho}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{ancho}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{alto}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{alto}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+         
+             \PY{k}{def} \PY{n+nf}{update}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{i}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{square}\PY{o}{.}\PY{n}{set\PYZus{}data}\PY{p}{(}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{ancho}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{ancho}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{ancho}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{ancho}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{ancho}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{o}{\PYZhy{}}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{alto}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{alto}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{alto}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{alto}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{alto}\PY{p}{]}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{wall}\PY{o}{.}\PY{n}{set\PYZus{}data}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{alto}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{largo\PYZus{}pared}\PY{p}{]}\PY{p}{)}
+                 \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{puntosr}\PY{p}{)}\PY{o}{\PYZgt{}}\PY{n}{i}\PY{p}{:}
+                     \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{ln1}\PY{o}{.}\PY{n}{set\PYZus{}offsets}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{puntosr}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                 \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{puntosg}\PY{p}{)}\PY{o}{\PYZgt{}}\PY{n}{i}\PY{p}{:}
+                     \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{ln2}\PY{o}{.}\PY{n}{set\PYZus{}offsets}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{puntosg}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    Ahora pasamos a definir el script que simulara el evento de como se
+mueve la particula
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}57}]:} \PY{n}{cantidad\PYZus{}molec} \PY{o}{=} \PY{l+m+mi}{1}
+         \PY{n}{alto} \PY{o}{=} \PY{l+m+mi}{10}
+         \PY{n}{ancho} \PY{o}{=} \PY{l+m+mi}{5}
+         \PY{n}{n\PYZus{}steps}\PY{o}{=}\PY{l+m+mi}{1000}
+         \PY{n}{wall\PYZus{}length}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{n}{alto}
+         \PY{n}{vel} \PY{o}{=} \PY{o}{.}\PY{l+m+mi}{1}
+         
+         \PY{k}{def} \PY{n+nf}{moleculas}\PY{p}{(}\PY{n}{ancho}\PY{p}{,}\PY{n}{alto}\PY{p}{,}\PY{n}{n\PYZus{}steps}\PY{p}{,}\PY{n}{vel}\PY{p}{)}\PY{p}{:}
+             \PY{n}{l} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{n}{particulas} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n\PYZus{}steps}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{r} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{move} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{[}\PY{n}{r}\PY{p}{,}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{r}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{2}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{*}\PY{n}{vel}
+                 \PY{n}{particulas} \PY{o}{=} \PY{n}{particulas}\PY{o}{+}\PY{n}{move}
+                 \PY{n}{l}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{particulas}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+             \PY{k}{return} \PY{n}{l}
+         
+         \PY{n}{l1} \PY{o}{=} \PY{n}{moleculas}\PY{p}{(}\PY{n}{ancho}\PY{p}{,}\PY{n}{alto}\PY{p}{,}\PY{n}{n\PYZus{}steps}\PY{p}{,}\PY{n}{vel}\PY{p}{)}
+         
+         \PY{n}{l1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{n}{l1}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}DrawSimulation(l1, [], ancho, alto, n\PYZus{}steps, 4, \PYZhy{}alto).draw(\PYZdq{}one\PYZhy{}particle.gif\PYZdq{}) Ver gif en Anexos}
+\end{Verbatim}
+
+
+    \hypertarget{ejercicio-9}{%
+\section{Ejercicio 9}\label{ejercicio-9}}
+
+    En este caso la cantidad de particulas aumenta, para simular este evento
+utilizaremos un codigo muy similar al anterior haciendo difenrencia en
+el numero de particulas.
+
+    Comenzamos con la simulacion sin pared:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}58}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{n}{cantidad\PYZus{}molec} \PY{o}{=} \PY{l+m+mi}{10000}
+         \PY{n}{alto} \PY{o}{=} \PY{l+m+mi}{10} \PY{c+c1}{\PYZsh{}Aclaracion: El alto y ancho van de \PYZhy{}x a x. Ej: \PYZhy{}10 a 10.}
+         \PY{n}{ancho} \PY{o}{=} \PY{l+m+mi}{5}
+         \PY{n}{n\PYZus{}steps}\PY{o}{=}\PY{l+m+mi}{4000}
+         \PY{n}{wall\PYZus{}length}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{n}{alto}
+         \PY{n}{vel} \PY{o}{=} \PY{o}{.}\PY{l+m+mi}{1}
+         
+         \PY{k}{def} \PY{n+nf}{moleculas}\PY{p}{(}\PY{n}{ancho}\PY{p}{,}\PY{n}{alto}\PY{p}{,}\PY{n}{cantidad\PYZus{}molec}\PY{p}{,}\PY{n}{n\PYZus{}steps}\PY{p}{,}\PY{n}{wall\PYZus{}length}\PY{p}{,}\PY{n}{vel}\PY{p}{,}\PY{n}{der}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} Vamos a limtar las posiciones iniciales a posiciones con 1 solo digito decimal.}
+             \PY{c+c1}{\PYZsh{} Con esto podemos agregar una performance significativa en el calculo de colisiones en las paredes.}
+             \PY{n}{stats} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{n}{l} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{n}{aa} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{random}\PY{p}{(}\PY{p}{(}\PY{n}{cantidad\PYZus{}molec}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)} \PY{o}{*} \PY{p}{(}\PY{n}{ancho} \PY{o}{\PYZhy{}} \PY{o}{.}\PY{l+m+mi}{21}\PY{p}{)} \PY{o}{+}\PY{o}{.}\PY{l+m+mi}{1}
+             \PY{n}{bb} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{random}\PY{p}{(}\PY{p}{(}\PY{n}{cantidad\PYZus{}molec}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)} \PY{o}{*} \PY{p}{(}\PY{l+m+mi}{2} \PY{o}{*} \PY{p}{(}\PY{n}{alto}\PY{o}{\PYZhy{}}\PY{o}{.}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{p}{(}\PY{n}{alto}\PY{o}{\PYZhy{}}\PY{o}{.}\PY{l+m+mi}{2}\PY{p}{)}
+             \PY{n}{particulas} \PY{o}{=} \PY{p}{[}\PY{n}{aa}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{der}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{bb}\PY{p}{]}
+             \PY{n}{particulas} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{n}{particulas}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}veo que no haya nada sobre la pared}
+             \PY{k}{assert}\PY{p}{(}\PY{p}{(}\PY{p}{(}\PY{n}{particulas}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{\PYZlt{}}\PY{l+m+mf}{0.1}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{n}{particulas}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{\PYZgt{}}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.1}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{n}{particulas}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{\PYZlt{}}\PY{o}{=}\PY{n}{wall\PYZus{}length}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{)}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n\PYZus{}steps}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{r} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{p}{(}\PY{n}{cantidad\PYZus{}molec}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{move} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{[}\PY{n}{r}\PY{p}{,}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{r}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{p}{(}\PY{n}{cantidad\PYZus{}molec}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{2}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{*}\PY{n}{vel}
+         
+                 \PY{c+c1}{\PYZsh{}Predigo el siguiente movimiento}
+                 \PY{n}{tmp} \PY{o}{=} \PY{n}{particulas}\PY{o}{+}\PY{n}{move}
+                 \PY{c+c1}{\PYZsh{}Veo si estoy sobre la pared}
+                 \PY{n}{colision\PYZus{}recipiente} \PY{o}{=} \PY{p}{(}\PY{n}{tmp}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{\PYZlt{}}\PY{l+m+mf}{0.1}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{n}{tmp}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{\PYZgt{}}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.1}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{n}{tmp}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{\PYZlt{}}\PY{o}{=}\PY{n}{wall\PYZus{}length}\PY{p}{)}
+                 \PY{c+c1}{\PYZsh{}ancho}
+                 \PY{n}{colision\PYZus{}recipiente} \PY{o}{=} \PY{n}{colision\PYZus{}recipiente} \PY{o}{|} \PY{p}{(}\PY{n}{tmp}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{ancho}\PY{p}{)} \PY{o}{|} \PY{p}{(}\PY{n}{tmp}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{ancho}\PY{p}{)}
+                 \PY{c+c1}{\PYZsh{}alto}
+                 \PY{n}{colision\PYZus{}recipiente} \PY{o}{=} \PY{n}{colision\PYZus{}recipiente} \PY{o}{|} \PY{p}{(}\PY{n}{tmp}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{alto}\PY{p}{)} \PY{o}{|} \PY{p}{(}\PY{n}{tmp}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{alto}\PY{p}{)}
+                 \PY{n}{tmp} \PY{o}{=} \PY{n}{particulas} \PY{o}{+} \PY{n}{move} \PY{o}{*} \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{colision\PYZus{}recipiente}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{k+kc}{None}\PY{p}{]}
+                 \PY{c+c1}{\PYZsh{} CHECK FOR WALL}
+                 \PY{k}{assert}\PY{p}{(}\PY{p}{(}\PY{p}{(}\PY{n}{tmp}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{\PYZlt{}}\PY{l+m+mf}{0.1}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{n}{tmp}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{\PYZgt{}}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.1}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{n}{tmp}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{\PYZlt{}}\PY{o}{=}\PY{n}{wall\PYZus{}length}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{)} \PY{c+c1}{\PYZsh{}Verficamos que nunca una particula este dentro de la pared.}
+                 \PY{n}{particulas} \PY{o}{=} \PY{n}{tmp}
+                 \PY{c+c1}{\PYZsh{}Finalmente esta correcto y actualizamos}
+                 \PY{n}{stats}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{p}{(}\PY{n}{particulas}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{p}{(}\PY{n}{particulas}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{\PYZlt{}}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{]} \PY{p}{)}
+                 \PY{n}{l}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{particulas}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+             \PY{k}{return} \PY{n}{l}\PY{p}{,}\PY{n}{stats}
+         
+         \PY{c+c1}{\PYZsh{}Simulo las particulas de la derecha}
+         \PY{n}{l1}\PY{p}{,}\PY{n}{s1} \PY{o}{=} \PY{n}{moleculas}\PY{p}{(}\PY{n}{ancho}\PY{p}{,}\PY{n}{alto}\PY{p}{,}\PY{n}{cantidad\PYZus{}molec}\PY{p}{,}\PY{n}{n\PYZus{}steps}\PY{p}{,}\PY{n}{wall\PYZus{}length}\PY{p}{,}\PY{n}{vel}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}Simulo las particulas de la izquierda}
+         \PY{n}{l2}\PY{p}{,}\PY{n}{s2} \PY{o}{=} \PY{n}{moleculas}\PY{p}{(}\PY{n}{ancho}\PY{p}{,}\PY{n}{alto}\PY{p}{,}\PY{n}{cantidad\PYZus{}molec}\PY{p}{,}\PY{n}{n\PYZus{}steps}\PY{p}{,}\PY{n}{wall\PYZus{}length}\PY{p}{,}\PY{n}{vel}\PY{p}{,}\PY{n}{der}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+         
+         \PY{n}{a0}\PY{p}{,}\PY{n}{b0} \PY{o}{=} \PY{n}{s1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{xt}\PY{p}{,}\PY{n}{y1}\PY{p}{,}\PY{n}{y2}\PY{o}{=}\PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{p}{]}
+         
+         \PY{k}{for} \PY{n}{i}\PY{p}{,}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{n}{b}\PY{p}{)} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{s1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+             \PY{n}{xt}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+             \PY{n}{y1}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{a}\PY{p}{)}
+             \PY{n}{y2}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{b}\PY{p}{)}
+             \PY{n}{a0} \PY{o}{=} \PY{n}{a}
+             \PY{n}{b0} \PY{o}{=} \PY{n}{b}
+         
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{xt}\PY{p}{,}\PY{n}{y1}\PY{p}{)}
+         \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{xt}\PY{p}{,}\PY{n}{y2}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         
+         
+         \PY{n}{l1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{n}{l1}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n}{l2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{n}{l2}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}DrawSimulation(l1, [] , ancho, alto, n\PYZus{}steps, 4, wall\PYZus{}length).draw(\PYZdq{}ej8.gif\PYZdq{}) Ver gif en Anexos}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_117_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Como se puede ver las moleculas tienden a estar en equilibrio
+
+    Comenzamos con la simulacion con pared:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}59}]:} \PY{n}{wall\PYZus{}length}\PY{o}{+}\PY{o}{=}\PY{n+nb}{int}\PY{p}{(}\PY{n}{alto}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}Simulo las particulas de la derecha}
+         \PY{n}{l1}\PY{p}{,}\PY{n}{s1} \PY{o}{=} \PY{n}{moleculas}\PY{p}{(}\PY{n}{ancho}\PY{p}{,}\PY{n}{alto}\PY{p}{,}\PY{n}{cantidad\PYZus{}molec}\PY{p}{,}\PY{n}{n\PYZus{}steps}\PY{p}{,}\PY{n}{wall\PYZus{}length}\PY{p}{,}\PY{n}{vel}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}Simulo las particulas de la izquierda}
+         \PY{n}{l2}\PY{p}{,}\PY{n}{s2} \PY{o}{=} \PY{n}{moleculas}\PY{p}{(}\PY{n}{ancho}\PY{p}{,}\PY{n}{alto}\PY{p}{,}\PY{n}{cantidad\PYZus{}molec}\PY{p}{,}\PY{n}{n\PYZus{}steps}\PY{p}{,}\PY{n}{wall\PYZus{}length}\PY{p}{,}\PY{n}{vel}\PY{p}{,}\PY{n}{der}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+         
+         \PY{n}{a0}\PY{p}{,}\PY{n}{b0} \PY{o}{=} \PY{n}{s1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{xt}\PY{p}{,}\PY{n}{y1}\PY{p}{,}\PY{n}{y2}\PY{o}{=}\PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{p}{]}
+         
+         \PY{k}{for} \PY{n}{i}\PY{p}{,}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{n}{b}\PY{p}{)} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{s1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+             \PY{n}{xt}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+             \PY{n}{y1}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{a}\PY{p}{)}
+             \PY{n}{y2}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{b}\PY{p}{)}
+             \PY{n}{a0} \PY{o}{=} \PY{n}{a}
+             \PY{n}{b0} \PY{o}{=} \PY{n}{b}
+         
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{xt}\PY{p}{,}\PY{n}{y1}\PY{p}{)}
+         \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{xt}\PY{p}{,}\PY{n}{y2}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         
+         
+         \PY{n}{l1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{n}{l1}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n}{l2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{n}{l2}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)} 
+         \PY{c+c1}{\PYZsh{}DrawSimulation(l1, [] , ancho, alto, n\PYZus{}steps, 4, wall\PYZus{}length).draw(\PYZdq{}ej8.gif\PYZdq{}) Ver gif en Anexos}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_120_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    En esta caso como esta la pared se llega mas lento al equilibrio porque
+hay menos intercambio.
+
+    \hypertarget{ejercicio-10}{%
+\section{Ejercicio 10}\label{ejercicio-10}}
+
+    Vamos a hacer la simulacion de 100 personas en un recinto de 100x100 con
+velocidad 1 y movimiento aleatorio
+
+    En este caso todas las personas se estaran moviendo, ademas una persona
+infectada no se podra curar.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}60}]:} \PY{n}{poblacion} \PY{o}{=} \PY{l+m+mi}{100}
+         \PY{n}{alto} \PY{o}{=} \PY{l+m+mi}{100}
+         \PY{n}{ancho} \PY{o}{=} \PY{l+m+mi}{100}
+         \PY{n}{porcentaje\PYZus{}contagios} \PY{o}{=} \PY{o}{.}\PY{l+m+mi}{05}
+         \PY{n}{n\PYZus{}steps} \PY{o}{=} \PY{l+m+mi}{4000}
+         \PY{n}{DIST\PYZus{}CONTAGIO}\PY{o}{=}\PY{l+m+mi}{2}
+         \PY{n}{vel} \PY{o}{=} \PY{l+m+mi}{1}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k}{def} \PY{n+nf}{inicializar}\PY{p}{(}\PY{n}{total}\PY{p}{,}\PY{n}{porcentaje\PYZus{}contagios}\PY{p}{)}\PY{p}{:}
+             \PY{n}{m} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{ancho}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{,}\PY{n}{alto}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+             \PY{n}{b} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{(}\PY{n}{ancho}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,}\PY{p}{(}\PY{n}{alto}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+             \PY{n}{enfermos} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{random}\PY{p}{(}\PY{p}{(}\PY{n+nb}{int}\PY{p}{(}\PY{n}{total}\PY{o}{*}\PY{n}{porcentaje\PYZus{}contagios}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)} \PY{o}{*}\PY{n}{m}\PY{o}{+}\PY{n}{b}
+             \PY{n}{sanos} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{random}\PY{p}{(}\PY{p}{(}\PY{n}{total}\PY{o}{\PYZhy{}}\PY{n+nb}{int}\PY{p}{(}\PY{n}{total} \PY{o}{*} \PY{n}{porcentaje\PYZus{}contagios}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{n}{m}\PY{o}{+}\PY{n}{b}
+             \PY{k}{return} \PY{n}{enfermos}\PY{p}{,}\PY{n}{sanos}
+         
+         \PY{k}{def} \PY{n+nf}{contagiar}\PY{p}{(}\PY{n}{sanos}\PY{p}{,} \PY{n}{enfermos}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} Todos con todos eje x}
+             \PY{n}{x} \PY{o}{=} \PY{p}{(}\PY{n}{sanos}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{k+kc}{None}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{enfermos}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} Todos con todos eje y}
+             \PY{n}{y} \PY{o}{=} \PY{p}{(}\PY{n}{sanos}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{k+kc}{None}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{enfermos}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} Distancia}
+             \PY{n}{contagios} \PY{o}{=} \PY{p}{(}\PY{n}{x} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2} \PY{o}{+} \PY{n}{y} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{n}{DIST\PYZus{}CONTAGIO}\PY{o}{*}\PY{n}{DIST\PYZus{}CONTAGIO}
+             \PY{c+c1}{\PYZsh{}Probailidad en caso de estar cerca}
+             \PY{n}{contraerla} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{random}\PY{p}{(}\PY{n}{sanos}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{*}\PY{n}{enfermos}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{\PYZlt{}}\PY{o}{=}\PY{o}{.}\PY{l+m+mi}{6}
+             \PY{c+c1}{\PYZsh{}ESTAS CERCA Y NO TE CUIDASTE}
+             \PY{n}{contagios} \PY{o}{=} \PY{n}{contagios} \PY{o}{\PYZam{}} \PY{n}{contraerla}
+             \PY{c+c1}{\PYZsh{}Si alguno de las personas te contagio entonces contagiado estas!}
+             \PY{k}{return} \PY{n}{contagios}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{enfermos}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0}
+         
+         \PY{k}{def} \PY{n+nf}{mover}\PY{p}{(}\PY{n}{vec}\PY{p}{)}\PY{p}{:}
+             \PY{n}{cantidad} \PY{o}{=} \PY{n}{vec}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+             \PY{n}{r} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{p}{(}\PY{n}{cantidad}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+             \PY{n}{move} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{[}\PY{n}{r}\PY{p}{,} \PY{n+nb}{abs}\PY{p}{(}\PY{n}{r} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)} \PY{o}{*} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{p}{(}\PY{n}{cantidad}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)} \PY{o}{*} \PY{l+m+mi}{2} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{)} \PY{o}{*} \PY{n}{vel}
+             \PY{c+c1}{\PYZsh{} Predigo el siguiente movimiento}
+             \PY{n}{tmp} \PY{o}{=} \PY{n}{vec} \PY{o}{+} \PY{n}{move}
+             \PY{c+c1}{\PYZsh{} ancho}
+             \PY{n}{colision\PYZus{}recipiente} \PY{o}{=} \PY{p}{(}\PY{n}{tmp}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{ancho}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)} \PY{o}{|} \PY{p}{(}\PY{n}{tmp}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{ancho}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} alto}
+             \PY{n}{colision\PYZus{}recipiente} \PY{o}{=} \PY{n}{colision\PYZus{}recipiente} \PY{o}{|} \PY{p}{(}\PY{n}{tmp}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{alto}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)} \PY{o}{|} \PY{p}{(}\PY{n}{tmp}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{alto}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}
+             \PY{n}{tmp} \PY{o}{=} \PY{n}{vec} \PY{o}{+} \PY{n}{move} \PY{o}{*} \PY{p}{(}\PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{colision\PYZus{}recipiente}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{k+kc}{None}\PY{p}{]}
+             \PY{k}{return} \PY{n}{tmp}
+         
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{k}{def} \PY{n+nf}{evolucion\PYZus{}infectados}\PY{p}{(}\PY{n}{t}\PY{p}{,}\PY{n}{sanos}\PY{p}{,}\PY{n}{enfermos}\PY{p}{,}\PY{n}{fname}\PY{p}{)}\PY{p}{:}
+             \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{t}\PY{p}{,} \PY{n}{sanos}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{g}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{t}\PY{p}{,} \PY{n}{enfermos}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sanos}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Enfermos}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Evolución de infectados}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Tiempo}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Cantidad De Personas}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{savefig}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{.png}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{fname}\PY{p}{)}\PY{p}{)}
+         
+         
+         \PY{c+c1}{\PYZsh{}CASO TODOS SE MUEVEN}
+         \PY{n}{enfermos}\PY{p}{,}\PY{n}{sanos} \PY{o}{=} \PY{n}{inicializar}\PY{p}{(}\PY{n}{poblacion}\PY{p}{,} \PY{n}{porcentaje\PYZus{}contagios}\PY{p}{)}
+         \PY{n}{l1}\PY{p}{,}\PY{n}{l2} \PY{o}{=} \PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{p}{]}
+         \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{n}{l1}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{sanos}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n}{l2}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{enfermos}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n}{evo} \PY{o}{=}\PY{p}{[}\PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{p}{]}\PY{p}{]}
+         \PY{k}{while} \PY{n}{i}\PY{o}{\PYZlt{}}\PY{n}{n\PYZus{}steps}\PY{p}{:}
+             \PY{n}{i}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+             \PY{c+c1}{\PYZsh{}Calcular contagio}
+             \PY{k}{if} \PY{n}{sanos}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{!=}\PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n}{idx} \PY{o}{=} \PY{n}{contagiar}\PY{p}{(}\PY{n}{sanos}\PY{p}{,}\PY{n}{enfermos}\PY{p}{)}
+                 \PY{n}{enfermos} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{[}\PY{n}{enfermos}\PY{p}{,}\PY{n}{sanos}\PY{p}{[}\PY{n}{idx}\PY{p}{]}\PY{p}{]}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+                 \PY{n}{sanos} \PY{o}{=} \PY{n}{sanos}\PY{p}{[}\PY{o}{\PYZti{}}\PY{n}{idx}\PY{p}{]}
+             \PY{n}{l1}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{sanos}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+             \PY{n}{l2}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{enfermos}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+             \PY{n}{evo}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+             \PY{n}{evo}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{sanos}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+             \PY{n}{evo}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{enfermos}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}Mover a todos}
+             \PY{k}{if} \PY{n}{sanos}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{!=}\PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n}{sanos} \PY{o}{=} \PY{n}{mover}\PY{p}{(}\PY{n}{sanos}\PY{p}{)}
+             \PY{k}{if} \PY{n}{sanos}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n}{enfermos} \PY{o}{=} \PY{n}{mover}\PY{p}{(}\PY{n}{enfermos}\PY{p}{)}
+         
+         
+         \PY{c+c1}{\PYZsh{}DrawSimulation(l1[:300], l2[:300], ancho//2, alto//2, 300, 4, \PYZhy{}alto//2).draw(\PYZdq{}covidA1.gif\PYZdq{})}
+         \PY{c+c1}{\PYZsh{}evolucion\PYZus{}infectados(evo[0],evo[1],evo[2],\PYZdq{}evolucionA1\PYZdq{}) \PYZsh{}Ver gif en Anexos}
+\end{Verbatim}
+
+
+    En este caso solo se podran mover las personas que esten sanas.
+Redefinimos las funciones que requieren un cambio, las otras las
+reutilizaremos del item previo.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}61}]:} \PY{n}{poblacion} \PY{o}{=} \PY{l+m+mi}{100}
+         \PY{n}{alto} \PY{o}{=} \PY{l+m+mi}{100}
+         \PY{n}{ancho} \PY{o}{=} \PY{l+m+mi}{100}
+         \PY{n}{porcentaje\PYZus{}contagios} \PY{o}{=} \PY{o}{.}\PY{l+m+mi}{05}
+         \PY{n}{n\PYZus{}steps} \PY{o}{=} \PY{l+m+mi}{4000}
+         \PY{n}{DIST\PYZus{}CONTAGIO}\PY{o}{=}\PY{l+m+mi}{2}
+         \PY{n}{vel} \PY{o}{=} \PY{l+m+mi}{1}
+         
+         \PY{c+c1}{\PYZsh{}Sólo se mueven los individuos sanos.}
+         \PY{c+c1}{\PYZsh{}Una vez que un individuo sano se enferma, se mueve entre 10 y 20 turnos más}
+         \PY{n}{enfermos}\PY{p}{,}\PY{n}{sanos} \PY{o}{=} \PY{n}{inicializar}\PY{p}{(}\PY{n}{poblacion}\PY{p}{,} \PY{n}{porcentaje\PYZus{}contagios}\PY{p}{)}
+         \PY{n}{l1}\PY{p}{,}\PY{n}{l2} \PY{o}{=} \PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{p}{]}
+         \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{n}{l1}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{sanos}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n}{l2}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{enfermos}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n}{ice} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{enfermos}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+         \PY{n}{evo} \PY{o}{=}\PY{p}{[}\PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{p}{]}\PY{p}{]}
+         \PY{k}{while} \PY{n}{sanos}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{!=}\PY{l+m+mi}{0} \PY{o+ow}{and} \PY{n}{i}\PY{o}{\PYZlt{}}\PY{n}{n\PYZus{}steps}\PY{p}{:}
+             \PY{n}{ice} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{clip}\PY{p}{(}\PY{n}{ice}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{)}
+             \PY{n}{i}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+             \PY{c+c1}{\PYZsh{}Calcular contagio}
+             \PY{k}{if} \PY{n}{sanos}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{!=}\PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n}{idx} \PY{o}{=} \PY{n}{contagiar}\PY{p}{(}\PY{n}{sanos}\PY{p}{,}\PY{n}{enfermos}\PY{p}{)}
+                 \PY{n}{enfermos} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{[}\PY{n}{enfermos}\PY{p}{,}\PY{n}{sanos}\PY{p}{[}\PY{n}{idx}\PY{p}{]}\PY{p}{]}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+                 \PY{n}{ice} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{[}\PY{n}{ice}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{21}\PY{p}{,} \PY{n}{idx}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{sanos} \PY{o}{=} \PY{n}{sanos}\PY{p}{[}\PY{o}{\PYZti{}}\PY{n}{idx}\PY{p}{]}
+             \PY{n}{l1}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{sanos}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+             \PY{n}{l2}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{enfermos}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{}data graficos}
+             \PY{n}{evo}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+             \PY{n}{evo}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{sanos}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+             \PY{n}{evo}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{enfermos}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}Mover a todos}
+             \PY{k}{if} \PY{n}{sanos}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n}{sanos} \PY{o}{=} \PY{n}{mover}\PY{p}{(}\PY{n}{sanos}\PY{p}{)}
+             \PY{k}{if} \PY{n}{sanos}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n}{tmp\PYZus{}enfermos} \PY{o}{=} \PY{n}{mover}\PY{p}{(}\PY{n}{enfermos}\PY{p}{)}
+                 \PY{n}{enfermos}\PY{p}{[}\PY{n}{ice}\PY{o}{!=}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{tmp\PYZus{}enfermos}\PY{p}{[}\PY{n}{ice}\PY{o}{!=}\PY{l+m+mi}{0}\PY{p}{]}
+         
+         
+         \PY{c+c1}{\PYZsh{}DrawSimulation(l1[:300], l2[:300], ancho//2, alto//2, 300, 4, \PYZhy{}alto//2).draw(\PYZdq{}covidA2.gif\PYZdq{}) \PYZsh{}Ver gif en Anexos}
+         \PY{c+c1}{\PYZsh{}evolucion\PYZus{}infectados(evo[0],evo[1],evo[2],\PYZdq{}evolucionA2\PYZdq{})}
+\end{Verbatim}
+
+
+    Finalmente, para el ultimo caso del modelo A, solo se podran mover el
+50\% de las personas. Redefinmos la parte de codigo necesaria:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}62}]:} \PY{n}{poblacion} \PY{o}{=} \PY{l+m+mi}{100}
+         \PY{n}{alto} \PY{o}{=} \PY{l+m+mi}{100}
+         \PY{n}{ancho} \PY{o}{=} \PY{l+m+mi}{100}
+         \PY{n}{porcentaje\PYZus{}contagios} \PY{o}{=} \PY{o}{.}\PY{l+m+mi}{05}
+         \PY{n}{n\PYZus{}steps} \PY{o}{=} \PY{l+m+mi}{4000}
+         \PY{n}{DIST\PYZus{}CONTAGIO}\PY{o}{=}\PY{l+m+mi}{2}
+         \PY{n}{vel} \PY{o}{=} \PY{l+m+mi}{1}
+         
+         \PY{c+c1}{\PYZsh{}Sólo se mueven los individuos sanos.}
+         \PY{c+c1}{\PYZsh{}Una vez que un individuo sano se enferma, se mueve entre 10 y 20 turnos más}
+         \PY{n}{enfermos}\PY{p}{,}\PY{n}{sanos} \PY{o}{=} \PY{n}{inicializar}\PY{p}{(}\PY{n}{poblacion}\PY{p}{,} \PY{n}{porcentaje\PYZus{}contagios}\PY{p}{)}
+         
+         \PY{n}{ice} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{poblacion}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{]} \PY{o}{+} \PY{p}{[}\PY{l+m+mi}{1} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{poblacion}\PY{o}{\PYZhy{}}\PY{n}{poblacion}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+         \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{shuffle}\PY{p}{(}\PY{n}{ice}\PY{p}{)}
+         
+         \PY{n}{ice\PYZus{}enfermos} \PY{o}{=} \PY{n}{ice}\PY{p}{[}\PY{p}{:}\PY{n}{enfermos}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}
+         \PY{n}{ice\PYZus{}sanos} \PY{o}{=} \PY{n}{ice}\PY{p}{[}\PY{n}{enfermos}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{:}\PY{p}{]}
+         
+         \PY{n}{l1}\PY{p}{,}\PY{n}{l2} \PY{o}{=} \PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{p}{]}
+         \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{n}{l1}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{sanos}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n}{l2}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{enfermos}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{evo} \PY{o}{=}\PY{p}{[}\PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{p}{]}\PY{p}{]}
+         \PY{k}{while} \PY{n}{i}\PY{o}{\PYZlt{}}\PY{n}{n\PYZus{}steps}\PY{p}{:}
+             \PY{n}{i}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+             \PY{c+c1}{\PYZsh{}Calcular contagio}
+             \PY{k}{if} \PY{n}{sanos}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{!=}\PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n}{idx} \PY{o}{=} \PY{n}{contagiar}\PY{p}{(}\PY{n}{sanos}\PY{p}{,}\PY{n}{enfermos}\PY{p}{)}
+                 \PY{n}{enfermos} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{[}\PY{n}{enfermos}\PY{p}{,} \PY{n}{sanos}\PY{p}{[}\PY{n}{idx}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+                 \PY{n}{ice\PYZus{}enfermos} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{[}\PY{n}{ice\PYZus{}enfermos}\PY{p}{,} \PY{n}{ice\PYZus{}sanos}\PY{p}{[}\PY{n}{idx}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+                 \PY{n}{sanos} \PY{o}{=} \PY{n}{sanos}\PY{p}{[}\PY{o}{\PYZti{}}\PY{n}{idx}\PY{p}{]}
+                 \PY{n}{ice\PYZus{}sanos} \PY{o}{=} \PY{n}{ice\PYZus{}sanos}\PY{p}{[}\PY{o}{\PYZti{}}\PY{n}{idx}\PY{p}{]}
+         
+             \PY{n}{l1}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{sanos}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+             \PY{n}{l2}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{enfermos}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{}data graficos}
+             \PY{n}{evo}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+             \PY{n}{evo}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{sanos}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+             \PY{n}{evo}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{enfermos}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}Mover a todos}
+             \PY{k}{if} \PY{n}{sanos}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n}{tmp\PYZus{}sanos} \PY{o}{=} \PY{n}{mover}\PY{p}{(}\PY{n}{sanos}\PY{p}{)}
+                 \PY{n}{sanos}\PY{p}{[}\PY{n}{ice\PYZus{}sanos} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{tmp\PYZus{}sanos}\PY{p}{[}\PY{n}{ice\PYZus{}sanos} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{]}
+             \PY{k}{if} \PY{n}{sanos}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n}{tmp\PYZus{}enfermos} \PY{o}{=} \PY{n}{mover}\PY{p}{(}\PY{n}{enfermos}\PY{p}{)}
+                 \PY{n}{enfermos}\PY{p}{[}\PY{n}{ice\PYZus{}enfermos} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{tmp\PYZus{}enfermos}\PY{p}{[}\PY{n}{ice\PYZus{}enfermos} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{]}
+         
+         
+         \PY{c+c1}{\PYZsh{}DrawSimulation(l1[:300], l2[:300], ancho//2, alto//2, 300, 4, \PYZhy{}alto//2).draw(\PYZdq{}covidA3.gif\PYZdq{}) \PYZsh{}Ver gif en Anexos}
+         \PY{c+c1}{\PYZsh{}evolucion\PYZus{}infectados(evo[0],evo[1],evo[2],\PYZdq{}evolucionA3\PYZdq{})}
+\end{Verbatim}
+
+
+    \hypertarget{parte-b}{%
+\subsection{Parte B}\label{parte-b}}
+
+    En este modelo la gente podra curse aleatoriamente, comenzamos con el
+caso A
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}63}]:} \PY{n}{poblacion} \PY{o}{=} \PY{l+m+mi}{100}
+         \PY{n}{alto} \PY{o}{=} \PY{l+m+mi}{100}
+         \PY{n}{ancho} \PY{o}{=} \PY{l+m+mi}{100}
+         \PY{n}{porcentaje\PYZus{}contagios} \PY{o}{=} \PY{o}{.}\PY{l+m+mi}{05}
+         \PY{n}{n\PYZus{}steps} \PY{o}{=} \PY{l+m+mi}{4000}
+         \PY{n}{DIST\PYZus{}CONTAGIO}\PY{o}{=}\PY{l+m+mi}{2}
+         \PY{n}{tiempo\PYZus{}enfermas}\PY{o}{=}\PY{l+m+mi}{20}
+         \PY{n}{vel} \PY{o}{=} \PY{l+m+mi}{1}
+         
+         \PY{c+c1}{\PYZsh{}CASO TODOS SE MUEVEN}
+         \PY{n}{enfermos}\PY{p}{,}\PY{n}{sanos} \PY{o}{=} \PY{n}{inicializar}\PY{p}{(}\PY{n}{poblacion}\PY{p}{,} \PY{n}{porcentaje\PYZus{}contagios}\PY{p}{)}
+         \PY{n}{l1}\PY{p}{,}\PY{n}{l2} \PY{o}{=} \PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{p}{]}
+         \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{n}{l1}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{sanos}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n}{l2}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{enfermos}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n}{evo} \PY{o}{=}\PY{p}{[}\PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{p}{]}\PY{p}{]}
+         \PY{n}{dias\PYZus{}enfermo} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n}{enfermos}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n}{tiempo\PYZus{}enfermas}
+         \PY{k}{while} \PY{n}{i}\PY{o}{\PYZlt{}}\PY{n}{n\PYZus{}steps}\PY{p}{:}
+             \PY{n}{dias\PYZus{}enfermo} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{clip}\PY{p}{(}\PY{n}{dias\PYZus{}enfermo}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{tiempo\PYZus{}enfermas}\PY{p}{)}
+             \PY{n}{i}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+             \PY{c+c1}{\PYZsh{}Intento Sanar}
+             \PY{k}{if} \PY{n}{enfermos}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{!=}\PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n}{idx} \PY{o}{=} \PY{p}{(}\PY{n}{dias\PYZus{}enfermo}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{)}\PY{o}{\PYZam{}}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{random}\PY{p}{(}\PY{n}{dias\PYZus{}enfermo}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{\PYZlt{}}\PY{o}{=}\PY{o}{.}\PY{l+m+mi}{8}\PY{p}{)}
+                 \PY{n}{sanos} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{[}\PY{n}{sanos}\PY{p}{,} \PY{n}{enfermos}\PY{p}{[}\PY{n}{idx}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+                 \PY{n}{enfermos} \PY{o}{=} \PY{n}{enfermos}\PY{p}{[}\PY{o}{\PYZti{}}\PY{n}{idx}\PY{p}{]}
+                 \PY{n}{dias\PYZus{}enfermo} \PY{o}{=} \PY{n}{dias\PYZus{}enfermo}\PY{p}{[}\PY{o}{\PYZti{}}\PY{n}{idx}\PY{p}{]}
+         
+             \PY{c+c1}{\PYZsh{}Calcular contagio}
+             \PY{k}{if} \PY{n}{sanos}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{!=}\PY{l+m+mi}{0} \PY{o+ow}{and} \PY{n}{enfermos}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{!=}\PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n}{idx} \PY{o}{=} \PY{n}{contagiar}\PY{p}{(}\PY{n}{sanos}\PY{p}{,}\PY{n}{enfermos}\PY{p}{)}
+                 \PY{n}{enfermos} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{[}\PY{n}{enfermos}\PY{p}{,}\PY{n}{sanos}\PY{p}{[}\PY{n}{idx}\PY{p}{]}\PY{p}{]}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+                 \PY{n}{dias\PYZus{}enfermo} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{[}\PY{n}{dias\PYZus{}enfermo}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n}{idx}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{o}{*} \PY{n}{tiempo\PYZus{}enfermas}\PY{p}{]}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+                 \PY{n}{sanos} \PY{o}{=} \PY{n}{sanos}\PY{p}{[}\PY{o}{\PYZti{}}\PY{n}{idx}\PY{p}{]}
+         
+             \PY{n}{l1}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{sanos}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+             \PY{n}{l2}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{enfermos}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+             \PY{n}{evo}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+             \PY{n}{evo}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{sanos}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+             \PY{n}{evo}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{enfermos}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}Mover a todos}
+             \PY{k}{if} \PY{n}{sanos}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{!=}\PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n}{sanos} \PY{o}{=} \PY{n}{mover}\PY{p}{(}\PY{n}{sanos}\PY{p}{)}
+             \PY{k}{if} \PY{n}{sanos}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n}{enfermos} \PY{o}{=} \PY{n}{mover}\PY{p}{(}\PY{n}{enfermos}\PY{p}{)}
+         
+         
+         \PY{c+c1}{\PYZsh{}DrawSimulation(l1[:300], l2[:300], ancho//2, alto//2, 300, 4, \PYZhy{}alto//2).draw(\PYZdq{}covidB1.gif\PYZdq{}) \PYZsh{}Ver gif en Anexos}
+         \PY{c+c1}{\PYZsh{}evolucion\PYZus{}infectados(evo[0],evo[1],evo[2],\PYZdq{}evolucionB1\PYZdq{})}
+\end{Verbatim}
+
+
+    Para el caso B, los que se enferman no se mueven y si te enfermaste
+despues de 10 turnos no te moves
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}64}]:} \PY{n}{poblacion} \PY{o}{=} \PY{l+m+mi}{100}
+         \PY{n}{alto} \PY{o}{=} \PY{l+m+mi}{100}
+         \PY{n}{ancho} \PY{o}{=} \PY{l+m+mi}{100}
+         \PY{n}{porcentaje\PYZus{}contagios} \PY{o}{=} \PY{o}{.}\PY{l+m+mi}{05}
+         \PY{n}{n\PYZus{}steps} \PY{o}{=} \PY{l+m+mi}{4000}
+         \PY{n}{DIST\PYZus{}CONTAGIO}\PY{o}{=}\PY{l+m+mi}{2}
+         \PY{n}{tiempo\PYZus{}enfermas}\PY{o}{=}\PY{l+m+mi}{20}
+         \PY{n}{vel} \PY{o}{=} \PY{l+m+mi}{1}
+         
+         \PY{c+c1}{\PYZsh{}Sólo se mueven los individuos sanos.}
+         \PY{c+c1}{\PYZsh{}Una vez que un individuo sano se enferma, se mueve entre 10 y 20 turnos más}
+         \PY{n}{enfermos}\PY{p}{,}\PY{n}{sanos} \PY{o}{=} \PY{n}{inicializar}\PY{p}{(}\PY{n}{poblacion}\PY{p}{,} \PY{n}{porcentaje\PYZus{}contagios}\PY{p}{)}
+         \PY{n}{l1}\PY{p}{,}\PY{n}{l2} \PY{o}{=} \PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{p}{]}
+         \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{n}{l1}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{sanos}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n}{l2}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{enfermos}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n}{evo} \PY{o}{=}\PY{p}{[}\PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{p}{]}\PY{p}{]}
+         \PY{n}{dias\PYZus{}enfermo} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n}{enfermos}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n}{tiempo\PYZus{}enfermas}
+         \PY{n}{ice} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{enfermos}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+         \PY{k}{while} \PY{n}{i}\PY{o}{\PYZlt{}}\PY{n}{n\PYZus{}steps}\PY{p}{:}
+             \PY{n}{dias\PYZus{}enfermo} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{clip}\PY{p}{(}\PY{n}{dias\PYZus{}enfermo} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{tiempo\PYZus{}enfermas}\PY{p}{)}
+             \PY{n}{ice} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{clip}\PY{p}{(}\PY{n}{ice} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{20}\PY{p}{)}
+             \PY{n}{i}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+             \PY{c+c1}{\PYZsh{}Intento Sanar}
+             \PY{k}{if} \PY{n}{enfermos}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{!=}\PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n}{idx} \PY{o}{=} \PY{p}{(}\PY{n}{dias\PYZus{}enfermo}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{)}\PY{o}{\PYZam{}}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{random}\PY{p}{(}\PY{n}{dias\PYZus{}enfermo}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{\PYZlt{}}\PY{o}{=}\PY{o}{.}\PY{l+m+mi}{8}\PY{p}{)}
+                 \PY{n}{sanos} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{[}\PY{n}{sanos}\PY{p}{,} \PY{n}{enfermos}\PY{p}{[}\PY{n}{idx}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+                 \PY{n}{enfermos} \PY{o}{=} \PY{n}{enfermos}\PY{p}{[}\PY{o}{\PYZti{}}\PY{n}{idx}\PY{p}{]}
+                 \PY{n}{dias\PYZus{}enfermo} \PY{o}{=} \PY{n}{dias\PYZus{}enfermo}\PY{p}{[}\PY{o}{\PYZti{}}\PY{n}{idx}\PY{p}{]}
+                 \PY{n}{ice} \PY{o}{=} \PY{n}{ice}\PY{p}{[}\PY{o}{\PYZti{}}\PY{n}{idx}\PY{p}{]}
+         
+             \PY{c+c1}{\PYZsh{}Calcular contagio}
+             \PY{k}{if} \PY{n}{sanos}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{!=}\PY{l+m+mi}{0} \PY{o+ow}{and} \PY{n}{enfermos}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{!=}\PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n}{idx} \PY{o}{=} \PY{n}{contagiar}\PY{p}{(}\PY{n}{sanos}\PY{p}{,}\PY{n}{enfermos}\PY{p}{)}
+                 \PY{n}{enfermos} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{[}\PY{n}{enfermos}\PY{p}{,}\PY{n}{sanos}\PY{p}{[}\PY{n}{idx}\PY{p}{]}\PY{p}{]}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+                 \PY{n}{dias\PYZus{}enfermo} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{[}\PY{n}{dias\PYZus{}enfermo}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n}{idx}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{o}{*} \PY{n}{tiempo\PYZus{}enfermas}\PY{p}{]}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+                 \PY{n}{ice} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{[}\PY{n}{ice}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{21}\PY{p}{,} \PY{n}{idx}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{sanos} \PY{o}{=} \PY{n}{sanos}\PY{p}{[}\PY{o}{\PYZti{}}\PY{n}{idx}\PY{p}{]}
+         
+             \PY{n}{l1}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{sanos}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+             \PY{n}{l2}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{enfermos}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+             \PY{n}{evo}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+             \PY{n}{evo}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{sanos}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+             \PY{n}{evo}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{enfermos}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}Mover a todos}
+             \PY{k}{if} \PY{n}{sanos}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{!=}\PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n}{sanos} \PY{o}{=} \PY{n}{mover}\PY{p}{(}\PY{n}{sanos}\PY{p}{)}
+             \PY{k}{if} \PY{n}{sanos}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n}{tmp\PYZus{}enfermos} \PY{o}{=} \PY{n}{mover}\PY{p}{(}\PY{n}{enfermos}\PY{p}{)}
+                 \PY{n}{enfermos}\PY{p}{[}\PY{n}{ice} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{tmp\PYZus{}enfermos}\PY{p}{[}\PY{n}{ice} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{]}
+         
+         
+         \PY{c+c1}{\PYZsh{}DrawSimulation(l1[:300], l2[:300], ancho//2, alto//2, 300, 4, \PYZhy{}alto//2).draw(\PYZdq{}covidB2.gif\PYZdq{}) \PYZsh{}Ver gif en Anexos}
+         \PY{c+c1}{\PYZsh{}evolucion\PYZus{}infectados(evo[0],evo[1],evo[2],\PYZdq{}evolucionB2\PYZdq{})}
+\end{Verbatim}
+
+
+    En este ultimo caso se movera al azar la mitad de la gente
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}65}]:} \PY{n}{poblacion} \PY{o}{=} \PY{l+m+mi}{100}
+         \PY{n}{alto} \PY{o}{=} \PY{l+m+mi}{100}
+         \PY{n}{ancho} \PY{o}{=} \PY{l+m+mi}{100}
+         \PY{n}{porcentaje\PYZus{}contagios} \PY{o}{=} \PY{o}{.}\PY{l+m+mi}{05}
+         \PY{n}{n\PYZus{}steps} \PY{o}{=} \PY{l+m+mi}{4000}
+         \PY{n}{DIST\PYZus{}CONTAGIO}\PY{o}{=}\PY{l+m+mi}{2}
+         \PY{n}{tiempo\PYZus{}enfermas}\PY{o}{=}\PY{l+m+mi}{20}
+         \PY{n}{vel} \PY{o}{=} \PY{l+m+mi}{1}
+         
+         \PY{c+c1}{\PYZsh{}Sólo se mueven los individuos sanos.}
+         \PY{c+c1}{\PYZsh{}Una vez que un individuo sano se enferma, se mueve entre 10 y 20 turnos más}
+         \PY{n}{enfermos}\PY{p}{,}\PY{n}{sanos} \PY{o}{=} \PY{n}{inicializar}\PY{p}{(}\PY{n}{poblacion}\PY{p}{,} \PY{n}{porcentaje\PYZus{}contagios}\PY{p}{)}
+         
+         
+         \PY{n}{ice} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{poblacion}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{]} \PY{o}{+} \PY{p}{[}\PY{l+m+mi}{1} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{poblacion}\PY{o}{\PYZhy{}}\PY{n}{poblacion}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+         \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{shuffle}\PY{p}{(}\PY{n}{ice}\PY{p}{)}
+         
+         \PY{n}{ice\PYZus{}enfermos} \PY{o}{=} \PY{n}{ice}\PY{p}{[}\PY{p}{:}\PY{n}{enfermos}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}
+         \PY{n}{ice\PYZus{}sanos} \PY{o}{=} \PY{n}{ice}\PY{p}{[}\PY{n}{enfermos}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{:}\PY{p}{]}
+         
+         
+         \PY{n}{l1}\PY{p}{,}\PY{n}{l2} \PY{o}{=} \PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{p}{]}
+         \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{n}{l1}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{sanos}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n}{l2}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{enfermos}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n}{evo} \PY{o}{=}\PY{p}{[}\PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{p}{]}\PY{p}{]}
+         \PY{n}{dias\PYZus{}enfermo} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n}{enfermos}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n}{tiempo\PYZus{}enfermas}
+         \PY{n}{ice} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{enfermos}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+         \PY{k}{while} \PY{n}{i}\PY{o}{\PYZlt{}}\PY{n}{n\PYZus{}steps}\PY{p}{:}
+             \PY{n}{dias\PYZus{}enfermo} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{clip}\PY{p}{(}\PY{n}{dias\PYZus{}enfermo} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{tiempo\PYZus{}enfermas}\PY{p}{)}
+             \PY{n}{i}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+             \PY{c+c1}{\PYZsh{}Intento Sanar}
+             \PY{k}{if} \PY{n}{enfermos}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{!=}\PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n}{idx} \PY{o}{=} \PY{p}{(}\PY{n}{dias\PYZus{}enfermo}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{)}\PY{o}{\PYZam{}}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{random}\PY{p}{(}\PY{n}{dias\PYZus{}enfermo}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{\PYZlt{}}\PY{o}{=}\PY{o}{.}\PY{l+m+mi}{8}\PY{p}{)}
+                 \PY{n}{sanos} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{[}\PY{n}{sanos}\PY{p}{,} \PY{n}{enfermos}\PY{p}{[}\PY{n}{idx}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+                 \PY{n}{ice\PYZus{}sanos} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{[}\PY{n}{ice\PYZus{}sanos}\PY{p}{,} \PY{n}{ice\PYZus{}enfermos}\PY{p}{[}\PY{n}{idx}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         
+                 \PY{n}{enfermos} \PY{o}{=} \PY{n}{enfermos}\PY{p}{[}\PY{o}{\PYZti{}}\PY{n}{idx}\PY{p}{]}
+                 \PY{n}{ice\PYZus{}enfermos} \PY{o}{=} \PY{n}{ice\PYZus{}enfermos}\PY{p}{[}\PY{o}{\PYZti{}}\PY{n}{idx}\PY{p}{]}
+                 \PY{n}{dias\PYZus{}enfermo} \PY{o}{=} \PY{n}{dias\PYZus{}enfermo}\PY{p}{[}\PY{o}{\PYZti{}}\PY{n}{idx}\PY{p}{]}
+         
+             \PY{c+c1}{\PYZsh{}Calcular contagio}
+             \PY{k}{if} \PY{n}{sanos}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{!=}\PY{l+m+mi}{0} \PY{o+ow}{and} \PY{n}{enfermos}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{!=}\PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n}{idx} \PY{o}{=} \PY{n}{contagiar}\PY{p}{(}\PY{n}{sanos}\PY{p}{,}\PY{n}{enfermos}\PY{p}{)}
+                 \PY{n}{enfermos} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{[}\PY{n}{enfermos}\PY{p}{,} \PY{n}{sanos}\PY{p}{[}\PY{n}{idx}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+                 \PY{n}{ice\PYZus{}enfermos} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{[}\PY{n}{ice\PYZus{}enfermos}\PY{p}{,} \PY{n}{ice\PYZus{}sanos}\PY{p}{[}\PY{n}{idx}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+                 \PY{n}{dias\PYZus{}enfermo} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{[}\PY{n}{dias\PYZus{}enfermo}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n}{idx}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{o}{*} \PY{n}{tiempo\PYZus{}enfermas}\PY{p}{]}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+                 \PY{n}{sanos} \PY{o}{=} \PY{n}{sanos}\PY{p}{[}\PY{o}{\PYZti{}}\PY{n}{idx}\PY{p}{]}
+                 \PY{n}{ice\PYZus{}sanos} \PY{o}{=} \PY{n}{ice\PYZus{}sanos}\PY{p}{[}\PY{o}{\PYZti{}}\PY{n}{idx}\PY{p}{]}
+         
+             \PY{n}{l1}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{sanos}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+             \PY{n}{l2}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{enfermos}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+             \PY{n}{evo}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+             \PY{n}{evo}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{sanos}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+             \PY{n}{evo}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{enfermos}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}Mover a todos}
+             \PY{k}{if} \PY{n}{sanos}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n}{tmp\PYZus{}sanos} \PY{o}{=} \PY{n}{mover}\PY{p}{(}\PY{n}{sanos}\PY{p}{)}
+                 \PY{n}{sanos}\PY{p}{[}\PY{n}{ice\PYZus{}sanos} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{tmp\PYZus{}sanos}\PY{p}{[}\PY{n}{ice\PYZus{}sanos} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{]}
+             \PY{k}{if} \PY{n}{sanos}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n}{tmp\PYZus{}enfermos} \PY{o}{=} \PY{n}{mover}\PY{p}{(}\PY{n}{enfermos}\PY{p}{)}
+                 \PY{n}{enfermos}\PY{p}{[}\PY{n}{ice\PYZus{}enfermos} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{tmp\PYZus{}enfermos}\PY{p}{[}\PY{n}{ice\PYZus{}enfermos} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{]}
+         
+                 
+         \PY{c+c1}{\PYZsh{}DrawSimulation(l1[:300], l2[:300], ancho//2, alto//2, 300, 4, \PYZhy{}alto//2).draw(\PYZdq{}covidB3.gif\PYZdq{}) \PYZsh{}Ver gif en Anexos}
+         \PY{c+c1}{\PYZsh{}evolucion\PYZus{}infectados(evo[0],evo[1],evo[2],\PYZdq{}evolucionB3\PYZdq{})}
+\end{Verbatim}
+
+
+    A priopi, como vemos que la curva baja tan rapido, podemos ver que para
+un plano de 100x100, poner 100 personas es poca gente porque el
+movimiento aleatorio simulado tienda a dejar a las pesonas en el mismo
+lugar entonces no interactuan entre ellas y la enfermedad se cura muy
+rapido.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
