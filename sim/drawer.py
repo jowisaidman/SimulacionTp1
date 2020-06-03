@@ -2,19 +2,18 @@ import matplotlib.pyplot as plt
 import os
 from matplotlib.animation import FuncAnimation, PillowWriter
 
-
 class DrawSimulation():
-    def __init__(self, puntosr,puntosg, ancho, alto,t,duracion,largo_pared):
+    def __init__(self, puntosr, puntosg, ancho, alto, t, duracion, largo_pared):
         self.fig, self.ax = plt.subplots()
-        self.ln1, = plt.plot([], [], 'r.')
-        self.ln2, = plt.plot([], [], 'g.')
-        self.square, = plt.plot([], [])
-        self.wall, = plt.plot([], [])
+
+        self.ln1 = self.ax.scatter([], [], c='r', s=1)
+        self.ln2 = self.ax.scatter([], [], c='g', s=1)
+        self.square, = self.ax.plot([], [])
+        self.wall, = self.ax.plot([], [])
 
         plt.axis('off')
-        #self.ln2, = plt.plot([], [], 'm*')
         self.alto = alto
-        self.largo_pared=largo_pared
+        self.largo_pared = largo_pared
         self.ancho = ancho
         self.t = t
         self.puntosr = puntosr
@@ -24,8 +23,8 @@ class DrawSimulation():
 
     def draw(self,fname="ejemplo.gif"):
         ani = FuncAnimation(self.fig, self.update, [i for i in range(self.t)], init_func=self.init)
-        writer = PillowWriter(fps=self.fps)
-        ani.save(fname, writer=writer)
+        writer = PillowWriter(fps = self.fps)
+        ani.save(fname, writer = writer)
         #os.system(f"start {fname}s")
         os.system(f"eog {fname}&")
 
@@ -37,6 +36,6 @@ class DrawSimulation():
         self.square.set_data([-self.ancho,self.ancho,self.ancho,-self.ancho,-self.ancho], [-self.alto,-self.alto,self.alto,self.alto,-self.alto])
         self.wall.set_data([0,0],[-self.alto, self.largo_pared])
         if len(self.puntosr)>i:
-            self.ln1.set_data(self.puntosr[i][0], self.puntosr[i][1])
+            self.ln1.set_offsets(self.puntosr[i])
         if len(self.puntosg)>i:
-            self.ln2.set_data(self.puntosg[i][0], self.puntosg[i][1])
+            self.ln2.set_offsets(self.puntosg[i])
