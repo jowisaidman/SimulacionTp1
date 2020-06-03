@@ -2,8 +2,8 @@ import numpy as np
 cantidad_molec = 10000
 alto = 10
 ancho = 5
-n_steps=300
-wall_length=-alto+10
+n_steps=100
+wall_length=-alto
 vel = .1
 
 def moleculas(ancho,alto,cantidad_molec,n_steps,wall_length,vel,der=True):
@@ -24,7 +24,6 @@ def moleculas(ancho,alto,cantidad_molec,n_steps,wall_length,vel,der=True):
 
         #Predigo el siguiente movimiento
         tmp = particulas+move
-        pos = (tmp[:, 0] == 0) * (tmp[:, 1] <= wall_length)
         #Veo si estoy sobre la pared
         colision_recipiente = (tmp[:,0]<0.1)*(tmp[:,0]>-0.1)*(tmp[:,1]<=wall_length)
         #ancho
@@ -50,20 +49,21 @@ xt,y1,y2=[],[],[]
 
 for i,(a,b) in enumerate(s1[1:]):
     xt.append(i)
-    y1.append( a)
-    y2.append( b)
-    a0=a
-    b0=b
+    y1.append(a)
+    y2.append(b)
+    a0 = a
+    b0 = b
+
 import matplotlib.pyplot as plt
-#ax = plt.plot(xt,y1)
-#ax = plt.plot(xt,y2)
-#print(xt,y1)
-#plt.show()
+ax = plt.plot(xt,y1)
+ax = plt.plot(xt,y2)
+plt.show()
+
 from sim.drawer import DrawSimulation
 
 l1 = np.concatenate(l1, axis=0)
 l2 = np.concatenate(l2, axis=0)
-DrawSimulation(l1, l2, ancho, alto, n_steps, 4, wall_length).draw("ejemplo.gif")
+DrawSimulation(l1, l2, ancho, alto, n_steps, 4, wall_length).draw("no-wall.gif")
 
 
 

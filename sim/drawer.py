@@ -6,8 +6,8 @@ class DrawSimulation():
     def __init__(self, puntosr, puntosg, ancho, alto, t, duracion, largo_pared):
         self.fig, self.ax = plt.subplots()
 
-        self.ln1 = self.ax.scatter([], [], c='r', s=1)
-        self.ln2 = self.ax.scatter([], [], c='g', s=1)
+        self.ln1 = self.ax.scatter([], [], c='g', s=1)
+        self.ln2 = self.ax.scatter([], [], c='r', s=1)
         self.square, = self.ax.plot([], [])
         self.wall, = self.ax.plot([], [])
 

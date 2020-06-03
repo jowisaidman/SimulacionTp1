@@ -21,7 +21,6 @@ class Particula():
             self.x = self.ancho-self.radio
         if self.x <= -self.ancho:
             self.x = -(self.ancho-self.radio)
-
         if self.y >= self.alto:
             self.y = self.alto-self.radio
         if self.y <= -self.alto:
