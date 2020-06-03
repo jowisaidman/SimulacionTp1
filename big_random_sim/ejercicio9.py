@@ -3,7 +3,7 @@ cantidad_molec = 10000
 alto = 10
 ancho = 5
 n_steps=4000
-wall_length=-alto
+wall_length=-alto+alto
 vel = .1
 
 def moleculas(ancho,alto,cantidad_molec,n_steps,wall_length,vel,der=True):
@@ -36,7 +36,7 @@ def moleculas(ancho,alto,cantidad_molec,n_steps,wall_length,vel,der=True):
         particulas = tmp
         #Finalmente esta correcto y actualizamos
         stats.append([(particulas[:,0]>0).sum(),(particulas[:,0]<=0).sum()] )
-        if i%10==0:
+        if i%40==0:
             l.append(particulas.reshape(1,-1,2))
     return l,stats
 
