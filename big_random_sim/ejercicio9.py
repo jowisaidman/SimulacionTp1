@@ -2,7 +2,7 @@ import numpy as np
 cantidad_molec = 10000
 alto = 10
 ancho = 5
-n_steps=100
+n_steps=4000
 wall_length=-alto
 vel = .1
 
@@ -36,7 +36,8 @@ def moleculas(ancho,alto,cantidad_molec,n_steps,wall_length,vel,der=True):
         particulas = tmp
         #Finalmente esta correcto y actualizamos
         stats.append([(particulas[:,0]>0).sum(),(particulas[:,0]<=0).sum()] )
-        l.append(particulas.reshape(1,-1,2))
+        if i%10==0:
+            l.append(particulas.reshape(1,-1,2))
     return l,stats
 
 #Simulo las particulas de la derecha
@@ -55,15 +56,15 @@ for i,(a,b) in enumerate(s1[1:]):
     b0 = b
 
 import matplotlib.pyplot as plt
-ax = plt.plot(xt,y1)
-ax = plt.plot(xt,y2)
+ax = plt.plot(xt, y1)
+ax = plt.plot(xt, y2)
 plt.show()
 
 from sim.drawer import DrawSimulation
 
 l1 = np.concatenate(l1, axis=0)
 l2 = np.concatenate(l2, axis=0)
-DrawSimulation(l1, l2, ancho, alto, n_steps, 4, wall_length).draw("no-wall.gif")
+DrawSimulation(l1, l2, ancho, alto, l1.shape[0], 4, wall_length).draw("wall.gif")
 
 
 
